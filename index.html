@@ -312,6 +312,66 @@
       font-family: 'Outfit', sans-serif; font-size: 11px;
       color: rgba(140,133,123,0.5); text-align: center;
     }
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+
+      /* NAV */
+      nav { padding: 18px 20px; }
+      nav.scrolled { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .nav-logo { font-size: 18px; }
+      .nav-logo span { font-size: 13px; }
+
+      /* HERO */
+      #hero { min-height: 100svh; }
+      .hero-content { padding: 40px 24px 40px; }
+      .hero-eyebrow { font-size: 10px; letter-spacing: 4px; margin-bottom: 20px; }
+      .hero-h1 { font-size: clamp(38px, 11vw, 56px); }
+      .hero-sub { font-size: 14px; margin-top: 20px; }
+      .hero-btns { flex-direction: column; align-items: center; gap: 12px; margin-top: 32px; }
+      .btn-primary, .btn-ghost { width: 100%; max-width: 280px; text-align: center; padding: 14px 24px; }
+
+      /* TRUST BAR */
+      #trust-bar { padding: 60px 24px; gap: 40px; }
+      .trust-item { min-width: 0; width: 100%; }
+      .trust-number { font-size: 36px; }
+
+      /* SERVICE BLOCKS */
+      .service-block,
+      .service-block.flipped { flex-direction: column; }
+      .service-img { min-height: 280px; }
+      .service-copy { padding: 40px 24px; }
+      .service-h2 { font-size: 30px; }
+      .service-p { font-size: 14px; max-width: 100%; }
+
+      /* FEATURED PROJECTS */
+      #featured { padding: 70px 20px; }
+      .section-h2-light { font-size: 34px; }
+      .projects-grid { grid-template-columns: 1fr; gap: 40px; }
+
+      /* STORY */
+      #story { padding: 70px 24px; }
+      .story-inner { flex-direction: column; gap: 36px; }
+      .story-inner img { width: 100% !important; height: 300px !important; }
+      .story-h2 { font-size: 28px; }
+      .story-p { font-size: 14px; }
+
+      /* TESTIMONIAL */
+      #testimonial { padding: 70px 24px; }
+      .quote-text { font-size: 20px; }
+
+      /* CTA */
+      #cta-block { padding: 70px 24px; }
+      .cta-h2 { font-size: 34px; }
+      .cta-p { font-size: 14px; }
+      #cta-block .btn-primary { display: block; max-width: 280px; margin: 0 auto; text-align: center; }
+
+      /* FOOTER */
+      footer { padding: 48px 24px 32px; }
+      .footer-inner { flex-direction: column; gap: 32px; }
+      .footer-links { gap: 16px 24px; }
+      .footer-bottom { margin-top: 28px; }
+    }
   </style>
 </head>
 <body>

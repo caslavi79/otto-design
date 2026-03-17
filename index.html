@@ -10,39 +10,27 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    body { background: #F5F0EB; }
+    a { text-decoration: none; }
+    a:hover { opacity: 0.85; }
     ::selection { background: rgba(92,90,69,0.25); }
 
-    :root {
-      --cream: #F5F0EB;
-      --dark: #1A1A18;
-      --warmGray: #8C857B;
-      --accent: #3D3830;
-      --lightWarm: #E8E2DA;
-      --white: #FEFDFB;
-      --olive: #5C5A45;
+    /* Fade-in animation classes */
+    .fade-init {
+      opacity: 0;
+      transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
     }
+    .fade-up    { transform: translateY(40px); }
+    .fade-down  { transform: translateY(-40px); }
+    .fade-left  { transform: translateX(40px); }
+    .fade-right { transform: translateX(-40px); }
+    .fade-visible { opacity: 1 !important; transform: none !important; }
 
-    body { background: var(--cream); min-height: 100vh; }
-
-    /* ─── Fade-in ─── */
-    .fade { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(.22,1,.36,1), transform 0.9s cubic-bezier(.22,1,.36,1); }
-    .fade.from-left  { transform: translateX(40px); }
-    .fade.from-right { transform: translateX(-40px); }
-    .fade.from-down  { transform: translateY(-40px); }
-    .fade.visible    { opacity: 1; transform: none; }
-    .fade.d1 { transition-delay: .1s; }
-    .fade.d2 { transition-delay: .2s; }
-    .fade.d3 { transition-delay: .3s; }
-    .fade.d4 { transition-delay: .4s; }
-    .fade.d5 { transition-delay: .5s; }
-    .fade.d6 { transition-delay: .6s; }
-    .fade.d7 { transition-delay: .7s; }
-    .fade.d9 { transition-delay: .9s; }
-
-    /* ─── Nav ─── */
+    /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: 24px 40px;
+      background: transparent;
       display: flex; justify-content: space-between; align-items: center;
       transition: all 0.5s ease;
       border-bottom: 1px solid transparent;
@@ -51,25 +39,25 @@
       padding: 16px 40px;
       background: rgba(26,26,24,0.95);
       backdrop-filter: blur(12px);
-      border-bottom-color: rgba(140,133,123,0.2);
+      border-bottom: 1px solid rgba(140,133,123,0.2);
     }
-    .nav-brand {
+    .nav-logo {
       font-family: 'Cormorant Garamond', serif;
       font-size: 22px; font-weight: 600;
-      color: var(--white); letter-spacing: 2px; text-transform: uppercase;
+      color: #FEFDFB; letter-spacing: 2px; text-transform: uppercase;
     }
-    .nav-brand span { font-weight: 300; font-size: 16px; letter-spacing: 3px; opacity: 0.7; }
+    .nav-logo span {
+      font-weight: 300; font-size: 16px; letter-spacing: 3px; opacity: 0.7;
+    }
     .nav-links { display: flex; gap: 32px; align-items: center; }
     .nav-links a {
-      color: var(--white); text-decoration: none;
-      font-family: 'Outfit', sans-serif;
+      color: #FEFDFB; font-family: 'Outfit', sans-serif;
       font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
-      font-weight: 400; opacity: 0.8;
-      transition: opacity 0.3s;
+      font-weight: 400; opacity: 0.8; transition: opacity 0.3s;
     }
     .nav-links a:hover { opacity: 1; }
 
-    /* ─── Hero ─── */
+    /* ── HERO ── */
     #hero {
       position: relative; height: 100vh; min-height: 700px;
       background: url('hero-background.jpg') center/cover no-repeat;
@@ -78,409 +66,442 @@
     }
     .hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(26,26,24,.45) 0%, rgba(26,26,24,.55) 50%, rgba(26,26,24,.7) 100%);
+      background: linear-gradient(180deg, rgba(26,26,24,0.45) 0%, rgba(26,26,24,0.55) 50%, rgba(26,26,24,0.7) 100%);
     }
     .hero-vignette {
       position: absolute; z-index: 1;
       top: 50%; left: 50%; transform: translate(-50%,-50%);
       width: 140%; height: 130%;
-      background: radial-gradient(ellipse at center, rgba(10,10,8,.5) 0%, rgba(10,10,8,.3) 25%, rgba(10,10,8,.1) 50%, transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(10,10,8,0.5) 0%, rgba(10,10,8,0.3) 25%, rgba(10,10,8,0.1) 50%, transparent 70%);
       pointer-events: none;
     }
     .hero-content {
-      position: relative; z-index: 2;
-      text-align: center; max-width: 800px; padding: 60px 80px 50px;
+      position: relative; z-index: 2; text-align: center;
+      max-width: 800px; padding: 60px 80px 50px;
     }
-    .hero-location {
-      font-family: 'Outfit', sans-serif; font-size: 11px;
-      letter-spacing: 6px; text-transform: uppercase;
-      color: rgba(245,240,235,.75); margin-bottom: 32px;
-      font-weight: 400; text-shadow: 0 1px 4px rgba(0,0,0,.6);
+    .hero-eyebrow {
+      font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 6px;
+      text-transform: uppercase; color: rgba(245,240,235,0.75); margin-bottom: 32px;
+      font-weight: 400; text-shadow: 0 1px 4px rgba(0,0,0,0.6);
     }
     .hero-h1 {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(48px,7vw,88px); font-weight: 300;
-      color: var(--cream); line-height: 1.05;
-      letter-spacing: -1px; text-shadow: 0 2px 8px rgba(0,0,0,.3);
+      color: #F5F0EB; line-height: 1.05;
+      letter-spacing: -1px; text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
     .hero-sub {
       font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 300;
-      color: rgba(245,240,235,.75); margin-top: 28px; line-height: 1.7;
+      color: rgba(245,240,235,0.75); margin-top: 28px; line-height: 1.7;
       max-width: 500px; margin-left: auto; margin-right: auto;
-      text-shadow: 0 1px 4px rgba(0,0,0,.6);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
     }
-    .hero-ctas { display: flex; gap: 16px; justify-content: center; margin-top: 44px; }
-    .btn-solid {
-      padding: 14px 36px; background: var(--cream); color: var(--dark);
-      font-family: 'Outfit', sans-serif; font-size: 12px;
-      letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
-      font-weight: 500; transition: all .3s;
+    .hero-btns { display: flex; gap: 16px; justify-content: center; margin-top: 44px; }
+    .btn-primary {
+      padding: 14px 36px; background: #F5F0EB; color: #1A1A18;
+      font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 2px;
+      text-transform: uppercase; font-weight: 500; transition: all 0.3s;
     }
-    .btn-solid:hover { background: var(--lightWarm); }
     .btn-ghost {
-      padding: 14px 36px; background: transparent; color: var(--cream);
-      font-family: 'Outfit', sans-serif; font-size: 12px;
-      letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
-      font-weight: 400; border: 1px solid rgba(245,240,235,.3); transition: all .3s;
+      padding: 14px 36px; background: transparent; color: #F5F0EB;
+      font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 2px;
+      text-transform: uppercase; font-weight: 400;
+      border: 1px solid rgba(245,240,235,0.3); transition: all 0.3s;
     }
-    .btn-ghost:hover { border-color: rgba(245,240,235,.7); }
     .hero-bottom-fade {
       position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
-      background: linear-gradient(transparent, var(--cream));
+      background: linear-gradient(transparent, #F5F0EB);
     }
 
-    /* ─── Trust Bar ─── */
-    #trust {
-      background: var(--cream); padding: 80px 40px;
+    /* ── TRUST BAR ── */
+    #trust-bar {
+      background: #F5F0EB; padding: 80px 40px;
       display: flex; justify-content: center; gap: 80px; flex-wrap: wrap;
     }
     .trust-item { text-align: center; min-width: 200px; }
     .trust-number {
-      font-family: 'Cormorant Garamond', serif; font-size: 42px;
-      font-weight: 300; color: var(--dark); letter-spacing: -1px;
+      font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300;
+      color: #1A1A18; letter-spacing: -1px;
     }
     .trust-label {
       font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 3px;
-      text-transform: uppercase; color: var(--warmGray); margin-top: 8px;
+      text-transform: uppercase; color: #8C857B; margin-top: 8px; font-weight: 400;
     }
 
-    /* ─── Service Blocks ─── */
+    /* ── SERVICE BLOCKS ── */
     .service-block {
-      display: flex; min-height: 500px; background: var(--cream);
+      display: flex; flex-direction: row; min-height: 500px; background: #F5F0EB;
     }
     .service-block.flipped { flex-direction: row-reverse; }
     .service-img {
-      flex: 1; min-height: 400px;
+      flex: 1;
       display: flex; align-items: center; justify-content: center;
-      color: var(--warmGray); font-family: 'Outfit', sans-serif;
-      font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
-      border-top: 1px solid var(--lightWarm); border-bottom: 1px solid var(--lightWarm);
+      color: #8C857B; font-family: 'Outfit', sans-serif; font-size: 13px;
+      letter-spacing: 3px; text-transform: uppercase; min-height: 400px;
+      border-top: 1px solid #E8E2DA; border-bottom: 1px solid #E8E2DA;
     }
-    .service-block .service-img { background: linear-gradient(160deg, rgba(61,56,48,.08) 0%, rgba(92,90,69,.04) 100%); }
-    .service-block.flipped .service-img { background: linear-gradient(200deg, rgba(61,56,48,.08) 0%, rgba(92,90,69,.04) 100%); }
+    .service-block:not(.flipped) .service-img {
+      background: linear-gradient(160deg, rgba(61,56,48,0.08) 0%, rgba(92,90,69,0.04) 100%);
+    }
+    .service-block.flipped .service-img {
+      background: linear-gradient(200deg, rgba(61,56,48,0.08) 0%, rgba(92,90,69,0.04) 100%);
+    }
     .service-copy {
       flex: 1; display: flex; align-items: center; padding: 60px 80px;
     }
     .service-eyebrow {
       font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 4px;
-      text-transform: uppercase; color: var(--warmGray); margin-bottom: 16px;
+      text-transform: uppercase; color: #8C857B; margin-bottom: 16px;
     }
     .service-h2 {
-      font-family: 'Cormorant Garamond', serif; font-size: 40px;
-      font-weight: 400; color: var(--dark); line-height: 1.15; margin-bottom: 20px;
+      font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 400;
+      color: #1A1A18; line-height: 1.15; margin: 0 0 20px;
     }
-    .service-desc {
+    .service-p {
       font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 300;
-      color: var(--warmGray); line-height: 1.8; max-width: 420px;
+      color: #8C857B; line-height: 1.8; max-width: 420px;
     }
-    .service-link {
+    .service-cta {
       display: inline-block; margin-top: 28px;
-      font-family: 'Outfit', sans-serif; font-size: 12px;
-      letter-spacing: 2px; text-transform: uppercase;
-      color: var(--dark); text-decoration: none; font-weight: 500;
-      border-bottom: 1px solid var(--dark); padding-bottom: 4px;
+      font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 2px;
+      text-transform: uppercase; color: #1A1A18; font-weight: 500;
+      border-bottom: 1px solid #1A1A18; padding-bottom: 4px;
     }
 
-    /* ─── Projects ─── */
-    #projects { background: var(--dark); padding: 100px 40px; }
-    .projects-header { text-align: center; margin-bottom: 60px; }
+    /* ── FEATURED PROJECTS ── */
+    #featured { background: #1A1A18; padding: 100px 40px; }
     .section-eyebrow {
-      font-family: 'Outfit', sans-serif; font-size: 11px;
-      letter-spacing: 4px; text-transform: uppercase;
-      color: var(--warmGray); margin-bottom: 16px;
+      font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 4px;
+      text-transform: uppercase; color: #8C857B; margin-bottom: 16px;
     }
     .section-h2-light {
-      font-family: 'Cormorant Garamond', serif; font-size: 44px;
-      font-weight: 300; color: var(--cream);
+      font-family: 'Cormorant Garamond', serif; font-size: 44px; font-weight: 300;
+      color: #F5F0EB; margin: 0;
     }
     .projects-grid {
       display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
       max-width: 1200px; margin: 0 auto;
     }
-    .project-card { cursor: pointer; transition: transform .5s cubic-bezier(.22,1,.36,1); }
+    .project-card {
+      cursor: pointer;
+      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+    }
     .project-card:hover { transform: translateY(-6px); }
     .project-thumb {
-      aspect-ratio: 4/3; background-size: cover; background-position: center;
+      aspect-ratio: 4/3;
+      background: linear-gradient(160deg, rgba(61,56,48,0.35) 0%, rgba(92,90,69,0.2) 100%);
+      background-size: cover; background-position: center;
       border-radius: 2px; margin-bottom: 20px;
+      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
     }
+    .project-row { display: flex; justify-content: space-between; align-items: baseline; }
     .project-name {
-      font-family: 'Cormorant Garamond', serif; font-size: 24px;
-      font-weight: 400; color: var(--cream);
+      font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400;
+      color: #F5F0EB;
+    }
+    .project-type {
+      font-family: 'Outfit', sans-serif; font-size: 10px; letter-spacing: 2px;
+      text-transform: uppercase; color: #5C5A45; font-weight: 500;
+      padding: 4px 10px; border: 1px solid #5C5A45; border-radius: 1px;
     }
     .project-meta {
-      font-family: 'Outfit', sans-serif; font-size: 13px;
-      color: var(--warmGray); margin-top: 6px; font-weight: 300;
+      font-family: 'Outfit', sans-serif; font-size: 13px; color: #8C857B;
+      margin-top: 6px; font-weight: 300;
     }
-    .projects-all-link {
-      text-align: center; margin-top: 56px;
-    }
-    .projects-all-link a {
+    .view-all-link {
       font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--cream); text-decoration: none;
-      border-bottom: 1px solid rgba(245,240,235,.3); padding-bottom: 4px;
+      text-transform: uppercase; color: #F5F0EB;
+      border-bottom: 1px solid rgba(245,240,235,0.3); padding-bottom: 4px;
     }
 
-    /* ─── Grandfather Story ─── */
+    /* ── GRANDFATHER STORY ── */
     #story {
-      background: var(--cream); padding: 100px 40px;
+      background: #F5F0EB; padding: 100px 40px;
       display: flex; justify-content: center;
     }
-    .story-inner { max-width: 900px; display: flex; gap: 60px; align-items: center; }
+    .story-inner {
+      max-width: 900px; display: flex; gap: 60px; align-items: center;
+    }
     .story-photo {
-      width: 280px; height: 340px; flex-shrink: 0;
-      background: linear-gradient(160deg, rgba(61,56,48,.1) 0%, rgba(92,90,69,.06) 100%);
-      border: 1px solid rgba(61,56,48,.1); border-radius: 2px;
+      flex-shrink: 0; width: 280px; height: 340px;
+      background: linear-gradient(160deg, rgba(61,56,48,0.1) 0%, rgba(92,90,69,0.06) 100%);
+      border: 1px solid rgba(61,56,48,0.1); border-radius: 2px;
       display: flex; align-items: center; justify-content: center;
-      color: var(--warmGray); font-family: 'Outfit', sans-serif;
+      color: #8C857B; font-family: 'Outfit', sans-serif;
       font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
     }
+    .story-eyebrow {
+      font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 4px;
+      text-transform: uppercase; color: #8C857B; margin-bottom: 16px;
+    }
     .story-h2 {
-      font-family: 'Cormorant Garamond', serif; font-size: 36px;
-      font-weight: 400; color: var(--dark); line-height: 1.2; margin-bottom: 20px;
+      font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 400;
+      color: #1A1A18; line-height: 1.2; margin: 0 0 20px;
     }
     .story-p {
       font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 300;
-      color: var(--warmGray); line-height: 1.85;
+      color: #8C857B; line-height: 1.85;
     }
-    .story-link {
+    .story-cta {
       display: inline-block; margin-top: 24px;
       font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--dark); text-decoration: none;
-      font-weight: 500; border-bottom: 1px solid var(--dark); padding-bottom: 4px;
+      text-transform: uppercase; color: #1A1A18; font-weight: 500;
+      border-bottom: 1px solid #1A1A18; padding-bottom: 4px;
     }
 
-    /* ─── Testimonial ─── */
+    /* ── TESTIMONIAL ── */
     #testimonial {
-      background: var(--lightWarm); padding: 100px 40px; text-align: center;
+      background: #E8E2DA; padding: 100px 40px; text-align: center;
     }
     .quote-mark {
       font-family: 'Cormorant Garamond', serif; font-size: 72px;
-      color: var(--warmGray); line-height: 0.5; margin-bottom: 24px; opacity: .4;
+      color: #8C857B; line-height: 0.5; margin-bottom: 24px; opacity: 0.4;
     }
     .quote-text {
-      max-width: 700px; margin: 0 auto;
-      font-family: 'Cormorant Garamond', serif; font-size: 24px;
-      font-weight: 400; font-style: italic; color: var(--accent); line-height: 1.7;
+      font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400;
+      font-style: italic; color: #3D3830; line-height: 1.7;
     }
     .quote-attr {
       font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 3px;
-      text-transform: uppercase; color: var(--warmGray); margin-top: 28px;
+      text-transform: uppercase; color: #8C857B; margin-top: 28px;
     }
 
-    /* ─── CTA ─── */
-    #cta { background: var(--dark); padding: 100px 40px; text-align: center; }
+    /* ── CTA BLOCK ── */
+    #cta-block { background: #1A1A18; padding: 100px 40px; text-align: center; }
     .cta-h2 {
       font-family: 'Cormorant Garamond', serif; font-size: 44px; font-weight: 300;
-      color: var(--cream); margin-bottom: 16px; line-height: 1.15;
+      color: #F5F0EB; margin: 0 0 16px; line-height: 1.15;
     }
     .cta-p {
       font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 300;
-      color: var(--warmGray); line-height: 1.7; margin-bottom: 36px;
+      color: #8C857B; line-height: 1.7; margin-bottom: 36px;
     }
-    .btn-cta {
-      display: inline-block; padding: 16px 44px; background: var(--cream);
-      color: var(--dark); font-family: 'Outfit', sans-serif; font-size: 12px;
-      letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
-      font-weight: 500; transition: background .3s;
-    }
-    .btn-cta:hover { background: var(--lightWarm); }
 
-    /* ─── Footer ─── */
+    /* ── FOOTER ── */
     footer {
-      background: var(--dark); padding: 60px 40px 40px;
-      border-top: 1px solid rgba(140,133,123,.15);
+      background: #1A1A18; padding: 60px 40px 40px;
+      border-top: 1px solid rgba(140,133,123,0.15);
     }
     .footer-inner {
       max-width: 1200px; margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: flex-start;
+      display: flex; justify-content: space-between; align-items: start;
       flex-wrap: wrap; gap: 40px;
     }
-    .footer-logo {
-      height: 28px; opacity: .8; margin-bottom: 12px; display: block;
-    }
     .footer-info {
-      font-family: 'Outfit', sans-serif; font-size: 13px;
-      color: var(--warmGray); font-weight: 300; line-height: 1.7;
+      font-family: 'Outfit', sans-serif; font-size: 13px; color: #8C857B;
+      font-weight: 300; line-height: 1.7;
     }
-    .footer-links { display: flex; gap: 40px; }
+    .footer-links { display: flex; gap: 32px; flex-wrap: wrap; }
     .footer-links a {
       font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 1px;
-      color: var(--warmGray); text-decoration: none; font-weight: 300;
-      transition: color .3s;
+      color: #8C857B; font-weight: 300; transition: color 0.3s;
     }
-    .footer-links a:hover { color: var(--cream); }
-    .footer-copy {
+    .footer-links a:hover { color: #FEFDFB; }
+    .footer-bottom {
       max-width: 1200px; margin: 40px auto 0; padding-top: 24px;
-      border-top: 1px solid rgba(140,133,123,.1);
+      border-top: 1px solid rgba(140,133,123,0.1);
       font-family: 'Outfit', sans-serif; font-size: 11px;
-      color: rgba(140,133,123,.5); text-align: center;
+      color: rgba(140,133,123,0.5); text-align: center;
     }
   </style>
 </head>
 <body>
 
-<!-- Nav -->
-<nav id="nav">
-  <div class="nav-brand">Otto <span>Design + Build</span></div>
-  <div class="nav-links">
-    <a href="#">Custom Homes</a>
-    <a href="#">Spec Homes</a>
-    <a href="#">Portfolio</a>
-    <a href="#">Process</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
-  </div>
-</nav>
-
-<!-- Hero -->
-<section id="hero">
-  <div class="hero-overlay"></div>
-  <div class="hero-vignette"></div>
-  <div class="hero-content">
-    <div class="hero-location fade d3">Austin &amp; Dallas–Fort Worth</div>
-    <h1 class="hero-h1 fade d5">Our word is<br />the foundation.</h1>
-    <p class="hero-sub fade d7">Custom and spec homes across Central Texas, designed and built by a family team that stakes their name on every project.</p>
-    <div class="hero-ctas fade d9">
-      <a href="#" class="btn-solid">See Our Work</a>
-      <a href="#" class="btn-ghost">Start Your Build</a>
-    </div>
-  </div>
-  <div class="hero-bottom-fade"></div>
-</section>
-
-<!-- Trust Bar -->
-<section id="trust">
-  <div class="trust-item fade"><div class="trust-number">2001</div><div class="trust-label">Family building tradition</div></div>
-  <div class="trust-item fade d2"><div class="trust-number">20+</div><div class="trust-label">Years combined experience</div></div>
-  <div class="trust-item fade d4"><div class="trust-number">1 Roof</div><div class="trust-label">Design + build, start to finish</div></div>
-</section>
-
-<!-- Service: Custom Homes -->
-<section class="service-block">
-  <div class="service-img">Custom Home Image</div>
-  <div class="service-copy">
-    <div class="fade from-left">
-      <div class="service-eyebrow">Services</div>
-      <h2 class="service-h2">Custom Homes</h2>
-      <p class="service-desc">Your vision, built from scratch. We work alongside you from first sketch to final walkthrough — designing and building under one roof so nothing gets lost in translation.</p>
-      <a href="#" class="service-link">Learn About Custom →</a>
-    </div>
-  </div>
-</section>
-
-<!-- Service: Spec Homes -->
-<section class="service-block flipped">
-  <div class="service-img">Spec Home Image</div>
-  <div class="service-copy">
-    <div class="fade from-right">
-      <div class="service-eyebrow">Services</div>
-      <h2 class="service-h2">Spec Homes</h2>
-      <p class="service-desc">When we're the client, we build to the same standard. Our spec homes are designed with the same intention and craft — move-in ready, built like we're keeping them.</p>
-      <a href="#" class="service-link">← View Available Homes</a>
-    </div>
-  </div>
-</section>
-
-<!-- Featured Projects -->
-<section id="projects">
-  <div class="projects-header fade">
-    <div class="section-eyebrow">Selected Work</div>
-    <h2 class="section-h2-light">Featured Projects</h2>
-  </div>
-  <div class="projects-grid">
-    <div class="project-card fade d2">
-      <div class="project-thumb" style="background-image: url('project-rockmoor.jpg');"></div>
-      <div class="project-name">Rockmoor</div>
-      <div class="project-meta">Crestwood — 4 BD / 3.5 BA — 3,200 SF</div>
-    </div>
-    <div class="project-card fade d3">
-      <div class="project-thumb" style="background-image: url('project-bridle-path.jpg');"></div>
-      <div class="project-name">Bridle Path</div>
-      <div class="project-meta">Central Austin — 4 BD / 3 BA — 2,800 SF</div>
-    </div>
-    <div class="project-card fade d4">
-      <div class="project-thumb" style="background-image: url('project-comal.jpg');"></div>
-      <div class="project-name">Comal</div>
-      <div class="project-meta">East Austin — 3 BD / 2.5 BA — 2,400 SF</div>
-    </div>
-  </div>
-  <div class="projects-all-link fade d5">
-    <a href="#">View All Projects →</a>
-  </div>
-</section>
-
-<!-- Grandfather Story -->
-<section id="story">
-  <div class="story-inner">
-    <div class="story-photo fade from-right">Photo of Johnnie</div>
-    <div class="fade d2">
-      <div class="section-eyebrow" style="color: var(--warmGray);">Our Story</div>
-      <h2 class="story-h2">Named for our grandfather.</h2>
-      <p class="story-p">Johnnie Otto Kveton taught us that a job isn't finished until it's done right. In 2001, he invited us out to his land in Comfort, Texas to help build his house — nail by nail, board by board, no waste, done by supper. That standard is the one we build to today.</p>
-      <a href="#" class="story-link">Read Our Full Story →</a>
-    </div>
-  </div>
-</section>
-
-<!-- Testimonial -->
-<section id="testimonial">
-  <div class="fade">
-    <div class="quote-mark">"</div>
-    <p class="quote-text">They build homes like they're going to be living in it themselves, and they simply refuse to cut corners. We are already secretly hoping that Otto Design + Build will build our next home.</p>
-    <div class="quote-attr">— Morgan</div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section id="cta">
-  <div class="fade" style="max-width: 600px; margin: 0 auto;">
-    <h2 class="cta-h2">Ready to build?</h2>
-    <p class="cta-p">The first conversation is just that — a conversation. Tell us about your vision, your lot, your timeline. No pressure, no sales pitch.</p>
-    <a href="#" class="btn-cta">Start Your Build</a>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer>
-  <div class="footer-inner">
-    <div>
-      <img src="footer-logo.png" alt="Otto Design + Build" class="footer-logo" />
-      <div class="footer-info">
-        Austin &amp; Dallas–Fort Worth, Texas<br />
-        info@ottodesignandbuild.com<br />
-        (512) 555-0100
-      </div>
-    </div>
-    <nav class="footer-links">
+  <!-- NAV -->
+  <nav id="main-nav">
+    <div class="nav-logo">Otto <span>Design + Build</span></div>
+    <div class="nav-links">
       <a href="#">Custom Homes</a>
       <a href="#">Spec Homes</a>
       <a href="#">Portfolio</a>
       <a href="#">Process</a>
       <a href="#">About</a>
       <a href="#">Contact</a>
-    </nav>
-  </div>
-  <div class="footer-copy">© 2026 Otto Design + Build. All rights reserved.</div>
-</footer>
+    </div>
+  </nav>
 
-<script>
-  // Nav scroll behavior
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-vignette"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow fade-init fade-up" data-delay="0.3">Austin & Dallas–Fort Worth</div>
+      <h1 class="hero-h1 fade-init fade-up" data-delay="0.5">Our word is<br>the foundation.</h1>
+      <p class="hero-sub fade-init fade-up" data-delay="0.7">
+        Custom and spec homes across Central Texas, designed and built by a family team that stakes their name on every project.
+      </p>
+      <div class="hero-btns fade-init fade-up" data-delay="0.9">
+        <a href="#" class="btn-primary">See Our Work</a>
+        <a href="#" class="btn-ghost">Start Your Build</a>
+      </div>
+    </div>
+    <div class="hero-bottom-fade"></div>
+  </section>
 
-  // Intersection observer for fade-ins
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
+  <!-- TRUST BAR -->
+  <section id="trust-bar">
+    <div class="trust-item fade-init fade-up" data-delay="0">
+      <div class="trust-number">2001</div>
+      <div class="trust-label">Family building tradition</div>
+    </div>
+    <div class="trust-item fade-init fade-up" data-delay="0.15">
+      <div class="trust-number">20+</div>
+      <div class="trust-label">Years combined experience</div>
+    </div>
+    <div class="trust-item fade-init fade-up" data-delay="0.3">
+      <div class="trust-number">1 Roof</div>
+      <div class="trust-label">Design + build, start to finish</div>
+    </div>
+  </section>
+
+  <!-- SERVICE: CUSTOM HOMES -->
+  <section class="service-block">
+    <div class="service-img" style="background-image:url('service-custom.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="service-copy">
+      <div class="fade-init fade-left">
+        <div class="service-eyebrow">Services</div>
+        <h2 class="service-h2">Custom Homes</h2>
+        <p class="service-p">Your vision, built from scratch. We work alongside you from first sketch to final walkthrough — designing and building under one roof so nothing gets lost in translation.</p>
+        <a href="#" class="service-cta">Learn About Custom →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE: SPEC HOMES -->
+  <section class="service-block flipped">
+    <div class="service-img" style="background-image:url('service-spec.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="service-copy">
+      <div class="fade-init fade-right">
+        <div class="service-eyebrow">Services</div>
+        <h2 class="service-h2">Spec Homes</h2>
+        <p class="service-p">When we're the client, we build to the same standard. Our spec homes are designed with the same intention and craft — move-in ready, built like we're keeping them.</p>
+        <a href="#" class="service-cta">← View Available Homes</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED PROJECTS -->
+  <section id="featured">
+    <div class="fade-init fade-up" style="text-align:center; margin-bottom:60px;">
+      <div class="section-eyebrow">Selected Work</div>
+      <h2 class="section-h2-light">Featured Projects</h2>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card fade-init fade-up" data-delay="0">
+        <div class="project-thumb" style="background-image:url('project-rockmoor.jpg')"></div>
+        <div class="project-row">
+          <div class="project-name">Rockmoor</div>
+          <span class="project-type">Custom</span>
+        </div>
+        <div class="project-meta">Crestwood — 4 BD / 3.5 BA — 3,200 SF</div>
+      </div>
+
+      <div class="project-card fade-init fade-up" data-delay="0.15">
+        <div class="project-thumb" style="background-image:url('project-bridle-path.jpg')"></div>
+        <div class="project-row">
+          <div class="project-name">Bridle Path</div>
+          <span class="project-type">Custom</span>
+        </div>
+        <div class="project-meta">Central Austin — 4 BD / 3 BA — 2,800 SF</div>
+      </div>
+
+      <div class="project-card fade-init fade-up" data-delay="0.3">
+        <div class="project-thumb" style="background-image:url('project-comal.jpg')"></div>
+        <div class="project-row">
+          <div class="project-name">Comal</div>
+          <span class="project-type">Spec</span>
+        </div>
+        <div class="project-meta">East Austin — 3 BD / 2.5 BA — 2,400 SF</div>
+      </div>
+
+    </div>
+    <div class="fade-init fade-up" data-delay="0.5" style="text-align:center; margin-top:56px;">
+      <a href="#" class="view-all-link">View All Projects →</a>
+    </div>
+  </section>
+
+  <!-- GRANDFATHER STORY -->
+  <section id="story">
+    <div class="story-inner">
+      <img src="johnnie-otto.jpg" alt="Johnnie Otto Kveton" class="fade-init fade-right" style="flex-shrink:0; width:280px; height:340px; object-fit:cover; border-radius:2px;" />
+      <div class="fade-init fade-up" data-delay="0.2">
+        <div class="story-eyebrow">Our Story</div>
+        <h2 class="story-h2">Named for our grandfather.</h2>
+        <p class="story-p">
+          Johnnie Otto Kveton taught us that a job isn't finished until it's done right. In 2001, he invited us out to his land in Comfort, Texas to help build his house — nail by nail, board by board, no waste, done by supper. That standard is the one we build to today.
+        </p>
+        <a href="#" class="story-cta">Read Our Full Story →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section id="testimonial">
+    <div class="fade-init fade-up" style="max-width:700px; margin:0 auto;">
+      <div class="quote-mark">"</div>
+      <p class="quote-text">
+        They build homes like they're going to be living in it themselves, and they simply refuse to cut corners. We are already secretly hoping that Otto Design + Build will build our next home.
+      </p>
+      <div class="quote-attr">— Morgan</div>
+    </div>
+  </section>
+
+  <!-- CTA BLOCK -->
+  <section id="cta-block">
+    <div class="fade-init fade-up" style="max-width:600px; margin:0 auto;">
+      <h2 class="cta-h2">Ready to build?</h2>
+      <p class="cta-p">
+        The first conversation is just that — a conversation. Tell us about your vision, your lot, your timeline. No pressure, no sales pitch.
+      </p>
+      <a href="#" class="btn-primary">Start Your Build</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <img src="footer-logo.png" alt="Otto Design + Build" style="height:52px; opacity:0.9; margin-bottom:14px; display:block;" />
+        <div class="footer-info">
+          Austin & Dallas–Fort Worth, Texas<br>
+          info@ottodesignandbuild.com<br>
+          (512) 555-0100
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#">Custom Homes</a>
+        <a href="#">Spec Homes</a>
+        <a href="#">Portfolio</a>
+        <a href="#">Process</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Otto Design + Build. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // ── Scroll nav ──
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
     });
-  }, { threshold: 0.1 });
 
-  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
-</script>
+    // ── Intersection Observer for fade-in ──
+    const faders = document.querySelectorAll('.fade-init');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const delay = el.dataset.delay || 0;
+          setTimeout(() => el.classList.add('fade-visible'), parseFloat(delay) * 1000);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    faders.forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>

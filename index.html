@@ -319,8 +319,34 @@
       nav { padding: 18px 20px; }
       nav.scrolled { padding: 14px 20px; }
       .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column; gap: 0;
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(26,26,24,0.98);
+        justify-content: center; align-items: center;
+        z-index: 99;
+      }
+      .nav-links.open a {
+        font-size: 15px; letter-spacing: 3px; padding: 18px 0;
+        border-bottom: 1px solid rgba(140,133,123,0.15); width: 200px; text-align: center;
+        opacity: 1;
+      }
+      .nav-links.open a:last-child { border-bottom: none; }
+      .burger {
+        display: flex; flex-direction: column; gap: 5px;
+        cursor: pointer; z-index: 101; padding: 4px;
+      }
+      .burger span {
+        display: block; width: 24px; height: 1.5px;
+        background: #FEFDFB;
+        transition: all 0.3s ease;
+      }
+      .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+      .burger.open span:nth-child(2) { opacity: 0; }
+      .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
       .nav-logo { font-size: 18px; }
       .nav-logo span { font-size: 13px; }
+      .burger { display: flex !important; }
 
       /* HERO */
       #hero { min-height: 100svh; }
@@ -379,13 +405,16 @@
   <!-- NAV -->
   <nav id="main-nav">
     <a href="#hero" class="nav-logo" style="text-decoration:none;">Otto <span>Design + Build</span></a>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href="#">Custom Homes</a>
       <a href="#">Spec Homes</a>
       <a href="#">Portfolio</a>
       <a href="#">Process</a>
       <a href="#">About</a>
       <a href="#">Contact</a>
+    </div>
+    <div class="burger" id="burger" style="display:none;">
+      <span></span><span></span><span></span>
     </div>
   </nav>
 
@@ -531,7 +560,7 @@
         <img src="footer-logo.png" alt="Otto Design + Build" style="height:52px; opacity:0.9; margin-bottom:14px; display:block;" />
         <div class="footer-info">
           Austin & Dallas–Fort Worth, Texas<br>
-          info@ottodesignandbuild.com<br>
+          <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="adc4c3cbc2edc2d9d9c2c9c8dec4cac3ccc3c9cfd8c4c1c983cec2c0">[email&#160;protected]</a><br>
           (512) 555-0100
         </div>
       </div>
@@ -548,6 +577,20 @@
   </footer>
 
   <script>
+    // ── Burger menu ──
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('nav-links');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        burger.classList.remove('open');
+        navLinks.classList.remove('open');
+      });
+    });
+
     // ── Scroll nav ──
     const nav = document.getElementById('main-nav');
     window.addEventListener('scroll', () => {

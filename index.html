@@ -24,7 +24,8 @@
     .fade-down  { transform: translateY(-40px); }
     .fade-left  { transform: translateX(40px); }
     .fade-right { transform: translateX(-40px); }
-    .fade-visible { opacity: 1 !important; transform: none !important; }
+    .fade-visible { opacity: 1 !important; transform: none; }
+    .project-card.fade-visible:hover { transform: translateY(-10px); }
 
     /* ── NAV ── */
     nav {
@@ -186,22 +187,17 @@
       cursor: pointer;
       transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
     }
-    .project-card:hover { transform: translateY(-6px); }
+    .project-card:hover { transform: translateY(-10px); }
     .project-thumb {
       aspect-ratio: 4/3;
       background: linear-gradient(160deg, rgba(61,56,48,0.35) 0%, rgba(92,90,69,0.2) 100%);
       background-size: cover; background-position: center;
       border-radius: 2px; margin-bottom: 20px;
       overflow: hidden;
-      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
     }
     .project-thumb-inner {
       width: 100%; height: 100%;
       background-size: cover; background-position: center;
-      transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
-    }
-    .project-card:hover .project-thumb-inner {
-      transform: scale(1.06);
     }
     .project-row { display: flex; justify-content: space-between; align-items: baseline; }
     .project-name {
@@ -560,7 +556,7 @@
         <img src="footer-logo.png" alt="Otto Design + Build" style="height:52px; opacity:0.9; margin-bottom:14px; display:block;" />
         <div class="footer-info">
           Austin & Dallas–Fort Worth, Texas<br>
-          <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="adc4c3cbc2edc2d9d9c2c9c8dec4cac3ccc3c9cfd8c4c1c983cec2c0">[email&#160;protected]</a><br>
+          info@ottodesignandbuild.com<br>
           (512) 555-0100
         </div>
       </div>

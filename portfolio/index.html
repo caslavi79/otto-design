@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="otto-logo-favicon.png" />
-  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="/index/otto-logo-favicon.png" />
+  <link rel="apple-touch-icon" href="/index/apple-touch-icon.png" />
   <title>Portfolio | Otto Design + Build</title>
   <meta name="description" content="Browse homes built by Otto Design + Build across Austin. Each project reflects our standard — no shortcuts, no compromises." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -53,38 +53,31 @@
 
     /* ── HERO — compact editorial header ── */
     .page-hero {
-      position: relative; height: 50vh; min-height: 400px;
-      display: flex; align-items: flex-end; overflow: hidden;
-      background: url('hero-portfolio.jpg') center/cover no-repeat;
+      position: relative; height: 65vh; min-height: 500px;
+      background: url('/index/hero-portfolio.jpg') center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
     }
     .page-hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(26,26,24,0.6) 0%, rgba(26,26,24,0.55) 30%, rgba(26,26,24,0.8) 60%, rgba(26,26,24,0.97) 85%, rgba(26,26,24,1) 100%);
+      background: linear-gradient(180deg, rgba(26,26,24,0.4) 0%, rgba(26,26,24,0.55) 50%, rgba(26,26,24,0.7) 100%);
     }
     .page-hero-content {
-      position: relative; z-index: 2; width: 100%;
-      max-width: 1400px; margin: 0 auto;
-      padding: 0 48px 64px;
-      display: flex; justify-content: space-between; align-items: flex-end; gap: 40px;
+      position: relative; z-index: 2; text-align: center; max-width: 700px; padding: 60px 40px;
     }
-    .page-hero-left { /* layout container */ }
     .page-hero-eyebrow {
-      font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 5px;
-      text-transform: uppercase; color: rgba(245,240,235,0.55); margin-bottom: 16px;
+      font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 6px;
+      text-transform: uppercase; color: rgba(245,240,235,0.7); margin-bottom: 24px;
     }
     .page-hero-h1 {
-      font-family: 'Cormorant Garamond', serif; font-size: clamp(44px, 5.5vw, 72px);
-      font-weight: 300; color: #F5F0EB; line-height: 1.05; letter-spacing: -1px;
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(40px,6vw,72px);
+      font-weight: 300; color: #F5F0EB; line-height: 1.1; text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
     .page-hero-sub {
-      font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 300;
-      color: rgba(245,240,235,0.85); line-height: 1.75; max-width: 340px;
-      padding-bottom: 6px;
+      font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 300;
+      color: rgba(245,240,235,0.7); margin-top: 24px; line-height: 1.7;
+      max-width: 480px; margin-left: auto; margin-right: auto;
     }
-    .hero-bottom-fade {
-      position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
-      background: rgba(245,240,235,0.08);
-    }
+    .page-hero-fade { position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(transparent, #F5F0EB); }
 
     /* ── PORTFOLIO GRID ── */
     .portfolio-section { background: #F5F0EB; padding: 32px 48px 120px; }
@@ -290,13 +283,10 @@
       .nav-links.open a:last-child { border-bottom: none; }
       .burger { display: flex !important; }
 
-      .page-hero { height: 40vh; min-height: 320px; }
-      .page-hero-content {
-        flex-direction: column; align-items: flex-start; gap: 16px;
-        padding: 0 24px 40px;
-      }
-      .page-hero-h1 { font-size: clamp(32px, 9vw, 48px); }
-      .page-hero-sub { font-size: 13px; max-width: 100%; }
+      .page-hero { height: 55vh; min-height: 400px; }
+      .page-hero-content { padding: 40px 24px; }
+      .page-hero-h1 { font-size: clamp(32px,9vw,48px); }
+      .page-hero-sub { font-size: 15px; }
 
       .portfolio-section { padding: 20px 16px 80px; }
       .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; grid-auto-rows: 240px; }
@@ -336,11 +326,10 @@
       .nav-logo { font-size: 18px; }
       .nav-logo span { font-size: 12px; }
 
-      .page-hero { height: 36vh; min-height: 280px; }
-      .page-hero-content { padding: 0 16px 32px; gap: 12px; }
+      .page-hero { height: 50vh; min-height: 350px; }
+      .page-hero-content { padding: 32px 16px; }
       .page-hero-h1 { font-size: clamp(28px, 8vw, 40px); }
-      .page-hero-sub { font-size: 12px; }
-      .page-hero-eyebrow { font-size: 10px; letter-spacing: 3px; }
+      .page-hero-sub { font-size: 14px; }
 
       .portfolio-section { padding: 16px 12px 60px; }
       .portfolio-grid { grid-auto-rows: 240px; gap: 10px; }
@@ -373,14 +362,14 @@
 
   <!-- NAV -->
   <nav id="main-nav">
-    <a href="index.html" class="nav-logo">Otto <span>Design + Build</span></a>
+    <a href="/" class="nav-logo">Otto <span>Design + Build</span></a>
     <div class="nav-links" id="nav-links">
-      <a href="custom-homes.html">Custom Homes</a>
-      <a href="spec-homes.html">Spec Homes</a>
-      <a href="portfolio.html" class="active">Portfolio</a>
-      <a href="process.html">Process</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+      <a href="/custom-homes/">Custom Homes</a>
+      <a href="/spec-homes/">Spec Homes</a>
+      <a href="/portfolio/" class="active">Portfolio</a>
+      <a href="/process/">Process</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
     </div>
     <div class="burger" id="burger">
       <span></span><span></span><span></span>
@@ -391,13 +380,10 @@
   <section class="page-hero">
     <div class="page-hero-overlay"></div>
     <div class="page-hero-content">
-      <div class="page-hero-left">
-        <div class="page-hero-eyebrow fade-init fade-up" data-delay="0.2">Portfolio</div>
-        <h1 class="page-hero-h1 fade-init fade-up" data-delay="0.4">Our work.</h1>
-      </div>
-      <p class="page-hero-sub fade-init fade-up" data-delay="0.6">Every project here carries the Otto name. Browse our work across Austin and Dallas–Fort Worth.</p>
+      <div class="page-hero-eyebrow fade-init fade-up" data-delay="0.3">Portfolio</div>
+      <h1 class="page-hero-h1 fade-init fade-up" data-delay="0.5">Our work.</h1>
+      <p class="page-hero-sub fade-init fade-up" data-delay="0.7">Every project here carries the Otto name. Browse our work across Austin and Dallas–Fort Worth.</p>
     </div>
-    <div class="hero-bottom-fade"></div>
   </section>
   <!-- PROJECTS -->
   <section class="portfolio-section">
@@ -436,7 +422,7 @@
       <div class="cta-eyebrow">Get Started</div>
       <h2 class="cta-h2">Like what you see?</h2>
       <p class="cta-p">Every project starts with a conversation. Tell us what you're envisioning and we'll talk about how to get there.</p>
-      <a href="contact.html" class="btn-primary">Start Your Build</a>
+      <a href="/contact/" class="btn-primary">Start Your Build</a>
     </div>
   </section>
 
@@ -444,7 +430,7 @@
   <footer>
     <div class="footer-inner">
       <div>
-        <img src="otto-logo-white.png" alt="Otto Design + Build" style="height:52px; opacity:0.9; margin-bottom:14px; display:block;" />
+        <img src="/index/otto-logo-white.png" alt="Otto Design + Build" style="height:52px; opacity:0.9; margin-bottom:14px; display:block;" />
         <div class="footer-info">
           Austin & Dallas–Fort Worth, Texas<br>
           info@ottodesignandbuild.com<br>
@@ -452,12 +438,12 @@
         </div>
       </div>
       <div class="footer-links">
-        <a href="custom-homes.html">Custom Homes</a>
-        <a href="spec-homes.html">Spec Homes</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="process.html">Process</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
+        <a href="/custom-homes/">Custom Homes</a>
+        <a href="/spec-homes/">Spec Homes</a>
+        <a href="/portfolio/">Portfolio</a>
+        <a href="/process/">Process</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
       </div>
     </div>
     <div class="footer-bottom">&copy; 2026 Otto Design + Build. All rights reserved.</div>
@@ -601,7 +587,7 @@
         card.dataset.delay = (i % 3 * 0.08).toFixed(2);
         card.dataset.project = i;
         card.innerHTML = `
-          <div class="portfolio-thumb" style="background-image:url('../images/${p.folder}/${p.images[0]}');"></div>
+          <div class="portfolio-thumb" style="background-image:url('/images/${p.folder}/${p.images[0]}');"></div>
           <div class="portfolio-card-overlay"></div>
           <div class="portfolio-card-info">
             <div class="portfolio-card-text">
@@ -656,7 +642,7 @@
 
       p.images.forEach((file, i) => {
         const img = document.createElement('img');
-        img.src = `../images/${p.folder}/${file}`;
+        img.src = `/images/${p.folder}/${file}`;
         img.alt = `${p.name} - Photo ${i + 1}`;
         if (i === 0) img.classList.add('active');
         carousel.insertBefore(img, carousel.querySelector('.carousel-btn'));

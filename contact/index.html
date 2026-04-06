@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/index/otto-logo-favicon.png" />
+  <link rel="apple-touch-icon" href="/index/apple-touch-icon.png" />
+  <title>Contact | Otto Design + Build</title>
+  <meta name="description" content="Start a conversation about your custom or spec home in Austin or DFW. No sales pitch, just an honest conversation about what's possible." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: #F5F0EB; overflow-x: hidden; }
+    a { text-decoration: none; }
+    a:hover { opacity: 0.85; }
+    ::selection { background: rgba(92,90,69,0.25); }
+
+    .fade-init { opacity: 0; transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1); }
+    .fade-up { transform: translateY(40px); }
+    .fade-left { transform: translateX(40px); }
+    .fade-right { transform: translateX(-40px); }
+    .fade-visible { opacity: 1 !important; transform: none; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 24px 40px; background: rgba(26,26,24,0.95); backdrop-filter: blur(12px); display: flex; justify-content: space-between; align-items: center; transition: all 0.5s ease; border-bottom: 1px solid rgba(140,133,123,0.2); }
+    nav.scrolled { padding: 16px 40px; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: #FEFDFB; letter-spacing: 2px; text-transform: uppercase; }
+    .nav-logo span { font-weight: 300; font-size: 16px; letter-spacing: 3px; opacity: 0.7; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { color: #FEFDFB; font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; opacity: 0.8; transition: opacity 0.3s; }
+    .nav-links a:hover { opacity: 1; }
+    .nav-links a.active { opacity: 1; border-bottom: 1px solid rgba(245,240,235,0.5); padding-bottom: 2px; }
+
+    /* ── CONTACT LAYOUT ── */
+    .contact-page { padding-top: 100px; }
+    .contact-header { text-align: center; padding: 60px 40px 0; }
+    .contact-eyebrow { font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 6px; text-transform: uppercase; color: #8C857B; margin-bottom: 20px; }
+    .contact-h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px,6vw,64px); font-weight: 300; color: #1A1A18; line-height: 1.1; margin-bottom: 20px; }
+    .contact-sub { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 300; color: #8C857B; line-height: 1.7; max-width: 500px; margin: 0 auto; }
+
+    .contact-body { display: flex; max-width: 1100px; margin: 60px auto 0; padding: 0 40px 100px; gap: 80px; }
+
+    /* LEFT: FORM */
+    .contact-form-wrap { flex: 1.4; }
+    .form-row { display: flex; gap: 20px; margin-bottom: 24px; }
+    .form-group { flex: 1; display: flex; flex-direction: column; }
+    .form-group.full { flex: 1; margin-bottom: 24px; }
+    .form-label { font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #8C857B; margin-bottom: 8px; font-weight: 400; }
+    .form-input, .form-select, .form-textarea {
+      font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 300;
+      color: #1A1A18; background: transparent;
+      border: none; border-bottom: 1px solid #E8E2DA;
+      padding: 12px 0; outline: none;
+      transition: border-color 0.3s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: #5C5A45; }
+    .form-input::placeholder, .form-textarea::placeholder { color: rgba(140,133,123,0.5); }
+    .form-select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238C857B' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 4px center; padding-right: 24px; }
+    .form-select option { background: #F5F0EB; color: #1A1A18; }
+    .form-textarea { resize: vertical; min-height: 120px; border: 1px solid #E8E2DA; padding: 16px; border-radius: 2px; margin-top: 4px; }
+    .form-submit {
+      display: inline-block; padding: 16px 44px; background: #1A1A18; color: #F5F0EB;
+      font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 2px;
+      text-transform: uppercase; font-weight: 500; border: none; cursor: pointer;
+      transition: background 0.3s; margin-top: 12px;
+    }
+    .form-submit:hover { background: #3D3830; }
+
+    /* RIGHT: INFO */
+    .contact-info-wrap { flex: 0.6; padding-top: 8px; }
+    .info-block { margin-bottom: 40px; }
+    .info-label { font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #5C5A45; margin-bottom: 12px; font-weight: 500; }
+    .info-text { font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 300; color: #8C857B; line-height: 1.8; }
+    .info-text a { color: #1A1A18; border-bottom: 1px solid #E8E2DA; padding-bottom: 1px; transition: border-color 0.3s; }
+    .info-text a:hover { border-color: #1A1A18; opacity: 1; }
+    .info-divider { width: 100%; height: 1px; background: #E8E2DA; margin: 40px 0; }
+
+    /* ── MAP PLACEHOLDER ── */
+    .map-section { background: #E8E2DA; height: 400px; display: flex; align-items: center; justify-content: center; }
+    .map-placeholder { font-family: 'Outfit', sans-serif; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #8C857B; }
+
+    footer { background: #1A1A18; padding: 60px 40px 40px; border-top: 1px solid rgba(140,133,123,0.15); }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 40px; }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: #FEFDFB; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+    .footer-logo span { font-weight: 300; font-size: 14px; letter-spacing: 3px; opacity: 0.7; }
+    .footer-info { font-family: 'Outfit', sans-serif; font-size: 13px; color: #8C857B; font-weight: 300; line-height: 1.7; }
+    .footer-links { display: flex; gap: 32px; flex-wrap: wrap; }
+    .footer-links a { font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 1px; color: #8C857B; font-weight: 300; transition: color 0.3s; }
+    .footer-links a:hover { color: #FEFDFB; }
+    .footer-bottom { max-width: 1200px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid rgba(140,133,123,0.1); font-family: 'Outfit', sans-serif; font-size: 11px; color: rgba(140,133,123,0.5); text-align: center; }
+
+    @media (max-width: 768px) {
+
+      /* NAV — matches index.html */
+      nav { padding: 18px 20px; }
+      nav.scrolled { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column; gap: 0;
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(26,26,24,0.98);
+        justify-content: center; align-items: center; z-index: 99;
+      }
+      .nav-links.open a {
+        font-size: 15px; letter-spacing: 3px; padding: 18px 0;
+        border-bottom: 1px solid rgba(140,133,123,0.15); width: 200px; text-align: center; opacity: 1;
+      }
+      .nav-links.open a:last-child { border-bottom: none; }
+      .burger {
+        display: flex; flex-direction: column; gap: 5px;
+        cursor: pointer; z-index: 101; padding: 10px;
+      }
+      .burger span {
+        display: block; width: 24px; height: 1.5px;
+        background: #FEFDFB; transition: all 0.3s ease;
+      }
+      .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+      .burger.open span:nth-child(2) { opacity: 0; }
+      .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+      .nav-logo { font-size: 18px; }
+      .nav-logo span { font-size: 13px; }
+      .burger { display: flex !important; }
+
+      /* CONTACT LAYOUT */
+      .contact-page { padding-top: 80px; }
+      .contact-header { padding: 40px 24px 0; }
+      .contact-h1 { font-size: clamp(32px,9vw,48px); }
+      .contact-sub { font-size: 15px; }
+      .contact-body { flex-direction: column; gap: 48px; padding: 40px 24px 70px; }
+      .contact-form-wrap { width: 100%; }
+      .contact-info-wrap { width: 100%; padding-top: 0; }
+
+      /* FORM — full-width stacked, 16px font (prevents iOS zoom), touch-friendly */
+      .form-row { flex-direction: column; gap: 24px; }
+      .form-input, .form-select { font-size: 16px; padding: 14px 0; min-height: 48px; }
+      .form-textarea { font-size: 16px; min-height: 120px; padding: 14px 16px; }
+      .form-submit { width: 100%; text-align: center; padding: 16px 24px; min-height: 52px; font-size: 13px; }
+
+      /* CONTACT INFO — touch-friendly links */
+      .info-text { font-size: 15px; overflow-wrap: break-word; word-break: break-word; }
+      .info-text a { display: inline-block; padding: 6px 0; min-height: 44px; line-height: 32px; word-break: break-all; }
+
+      /* MAP */
+      .map-section { height: 280px; }
+
+      /* FOOTER — matches index.html */
+      footer { padding: 48px 24px 32px; }
+      .footer-inner { flex-direction: column; gap: 32px; }
+      .footer-links { flex-direction: column; gap: 14px; }
+      .footer-links a { padding: 4px 0; min-height: 44px; line-height: 36px; }
+      .footer-info { font-size: 12px; overflow-wrap: break-word; word-break: break-word; }
+      .footer-bottom { margin-top: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="main-nav">
+    <a href="/" class="nav-logo" style="text-decoration:none;">Otto <span>Design + Build</span></a>
+    <div class="nav-links" id="nav-links">
+      <a href="/custom-homes/">Custom Homes</a>
+      <a href="/spec-homes/">Spec Homes</a>
+      <a href="/portfolio/">Portfolio</a>
+      <a href="/process/">Process</a>
+      <a href="/about/">About</a>
+      <a href="/contact/" class="active">Contact</a>
+    </div>
+    <div class="burger" id="burger" style="display:none;">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <div class="contact-page">
+    <div class="contact-header fade-init fade-up">
+      <div class="contact-eyebrow">Get In Touch</div>
+      <h1 class="contact-h1">Let's talk about<br>your build.</h1>
+      <p class="contact-sub">The first conversation is just that: a conversation. Tell us about your vision, your lot, your timeline. No pressure, no sales pitch.</p>
+    </div>
+
+    <div class="contact-body">
+      <!-- FORM -->
+      <div class="contact-form-wrap fade-init fade-up" data-delay="0.2">
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="first-name">First Name</label>
+              <input type="text" id="first-name" name="first_name" class="form-input" placeholder="John" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="last-name">Last Name</label>
+              <input type="text" id="last-name" name="last_name" class="form-input" placeholder="Doe" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="email">Email</label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="john@example.com" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" class="form-input" placeholder="(512) 555-0000" />
+            </div>
+          </div>
+          <div class="form-group full">
+            <label class="form-label" for="interest">I'm Interested In</label>
+            <select id="interest" name="interest" class="form-select" required>
+              <option value="" disabled selected>Select one</option>
+              <option value="custom">Custom Home</option>
+              <option value="spec">Spec / Available Home</option>
+              <option value="remodel">Remodel</option>
+              <option value="other">Not sure yet</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label class="form-label" for="location">Where Are You Building?</label>
+            <select id="location" name="location" class="form-select">
+              <option value="" disabled selected>Select area</option>
+              <option value="austin">Austin</option>
+              <option value="dfw">Dallas–Fort Worth</option>
+              <option value="central-tx">Central Texas (other)</option>
+              <option value="undecided">Haven't decided yet</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label class="form-label" for="message">Tell Us About Your Project</label>
+            <textarea id="message" name="message" class="form-textarea" placeholder="What are you envisioning? Do you have a lot? A timeline? Whatever you're thinking, we want to hear it."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Message</button>
+        </form>
+      </div>
+
+      <!-- INFO -->
+      <div class="contact-info-wrap fade-init fade-left" data-delay="0.3">
+        <div class="info-block">
+          <div class="info-label">Email</div>
+          <div class="info-text"><a href="mailto:info@ottodesignandbuild.com">info@ottodesignandbuild.com</a></div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Phone</div>
+          <div class="info-text"><a href="tel:+15125550100">(512) 555-0100</a></div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Service Areas</div>
+          <div class="info-text">Austin, Texas<br>Dallas–Fort Worth, Texas<br>Central Texas</div>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-block">
+          <div class="info-label">Response Time</div>
+          <div class="info-text">We typically respond within 24 hours. If you're on a tight timeline, give us a call. That's always the fastest way to reach us.</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Follow Along</div>
+          <div class="info-text">
+            <a href="#">Instagram</a><br>
+            <a href="#">Houzz</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAP -->
+  <div class="map-section">
+    <div class="map-placeholder">[ Map embed: Austin & DFW service area ]</div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <img src="/index/otto-logo-white.png" alt="Otto Design + Build" style="height:52px; opacity:0.9; margin-bottom:14px; display:block;" />
+        <div class="footer-info">Austin & Dallas–Fort Worth, Texas<br><a href="mailto:info@ottodesignandbuild.com" style="color:#8C857B;">info@ottodesignandbuild.com</a><br><a href="tel:+15125550100" style="color:#8C857B;">(512) 555-0100</a></div>
+      </div>
+      <div class="footer-links">
+        <a href="/custom-homes/">Custom Homes</a>
+        <a href="/spec-homes/">Spec Homes</a>
+        <a href="/portfolio/">Portfolio</a>
+        <a href="/process/">Process</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Otto Design + Build. All rights reserved.</div>
+  </footer>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('nav-links');
+    burger.addEventListener('click', () => { burger.classList.toggle('open'); navLinks.classList.toggle('open'); });
+    navLinks.querySelectorAll('a').forEach(a => { a.addEventListener('click', () => { burger.classList.remove('open'); navLinks.classList.remove('open'); }); });
+    window.addEventListener('scroll', () => { document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 60); });
+    const faders = document.querySelectorAll('.fade-init');
+    const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { const el = entry.target; setTimeout(() => el.classList.add('fade-visible'), parseFloat(el.dataset.delay || 0) * 1000); observer.unobserve(el); } }); }, { threshold: 0.1 });
+    faders.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

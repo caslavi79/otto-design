@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="otto-logo-favicon.png" />
   <title>Otto Design + Build</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -10,7 +11,7 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { background: #F5F0EB; }
+    body { background: #F5F0EB; overflow-x: hidden; }
     a { text-decoration: none; }
     a:hover { opacity: 0.85; }
     ::selection { background: rgba(92,90,69,0.25); }
@@ -90,6 +91,7 @@
       font-size: clamp(48px,7vw,88px); font-weight: 300;
       color: #F5F0EB; line-height: 1.05;
       letter-spacing: -1px; text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      overflow-wrap: break-word;
     }
     .hero-sub {
       font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 300;
@@ -103,12 +105,14 @@
       font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 2px;
       text-transform: uppercase; font-weight: 500; transition: all 0.3s;
     }
+    .btn-primary:hover { background: #FFFFFF; opacity: 1; transform: translateY(-1px); }
     .btn-ghost {
       padding: 14px 36px; background: transparent; color: #F5F0EB;
       font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 2px;
       text-transform: uppercase; font-weight: 400;
       border: 1px solid rgba(245,240,235,0.3); transition: all 0.3s;
     }
+    .btn-ghost:hover { border-color: rgba(245,240,235,0.7); opacity: 1; }
     .hero-bottom-fade {
       position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
       background: linear-gradient(transparent, #F5F0EB);
@@ -140,12 +144,7 @@
       color: #8C857B; font-family: 'Outfit', sans-serif; font-size: 13px;
       letter-spacing: 3px; text-transform: uppercase; min-height: 400px;
       border-top: 1px solid #E8E2DA; border-bottom: 1px solid #E8E2DA;
-    }
-    .service-block:not(.flipped) .service-img {
-      background: linear-gradient(160deg, rgba(61,56,48,0.08) 0%, rgba(92,90,69,0.04) 100%);
-    }
-    .service-block.flipped .service-img {
-      background: linear-gradient(200deg, rgba(61,56,48,0.08) 0%, rgba(92,90,69,0.04) 100%);
+      background-size: cover; background-position: center;
     }
     .service-copy {
       flex: 1; display: flex; align-items: center; padding: 60px 80px;
@@ -161,13 +160,16 @@
     .service-p {
       font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 300;
       color: #8C857B; line-height: 1.8; max-width: 420px;
+      overflow-wrap: break-word;
     }
     .service-cta {
       display: inline-block; margin-top: 28px;
       font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 2px;
       text-transform: uppercase; color: #1A1A18; font-weight: 500;
       border-bottom: 1px solid #1A1A18; padding-bottom: 4px;
+      transition: opacity 0.3s;
     }
+    .service-cta:hover { opacity: 0.7; }
 
     /* ── FEATURED PROJECTS ── */
     #featured { background: #1A1A18; padding: 100px 40px; }
@@ -184,7 +186,7 @@
       max-width: 1200px; margin: 0 auto;
     }
     .project-card {
-      cursor: pointer;
+      cursor: pointer; color: inherit;
       transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
     }
     .project-card:hover { transform: translateY(-10px); }
@@ -204,20 +206,19 @@
       font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400;
       color: #F5F0EB;
     }
-    .project-type {
-      font-family: 'Outfit', sans-serif; font-size: 10px; letter-spacing: 2px;
-      text-transform: uppercase; color: #5C5A45; font-weight: 500;
-      padding: 4px 10px; border: 1px solid #5C5A45; border-radius: 1px;
-    }
     .project-meta {
       font-family: 'Outfit', sans-serif; font-size: 13px; color: #8C857B;
       margin-top: 6px; font-weight: 300;
+      overflow-wrap: break-word; word-break: break-word;
     }
     .view-all-link {
+      display: inline-block;
       font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 2px;
-      text-transform: uppercase; color: #F5F0EB;
-      border-bottom: 1px solid rgba(245,240,235,0.3); padding-bottom: 4px;
+      text-transform: uppercase; color: #F5F0EB; font-weight: 500;
+      border: 1px solid rgba(245,240,235,0.3); padding: 14px 36px;
+      transition: all 0.3s;
     }
+    .view-all-link:hover { border-color: rgba(245,240,235,0.7); opacity: 1; }
 
     /* ── GRANDFATHER STORY ── */
     #story {
@@ -226,14 +227,6 @@
     }
     .story-inner {
       max-width: 900px; display: flex; gap: 60px; align-items: center;
-    }
-    .story-photo {
-      flex-shrink: 0; width: 280px; height: 340px;
-      background: linear-gradient(160deg, rgba(61,56,48,0.1) 0%, rgba(92,90,69,0.06) 100%);
-      border: 1px solid rgba(61,56,48,0.1); border-radius: 2px;
-      display: flex; align-items: center; justify-content: center;
-      color: #8C857B; font-family: 'Outfit', sans-serif;
-      font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
     }
     .story-eyebrow {
       font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 4px;
@@ -252,7 +245,9 @@
       font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 2px;
       text-transform: uppercase; color: #1A1A18; font-weight: 500;
       border-bottom: 1px solid #1A1A18; padding-bottom: 4px;
+      transition: opacity 0.3s;
     }
+    .story-cta:hover { opacity: 0.7; }
 
     /* ── TESTIMONIAL ── */
     #testimonial {
@@ -265,6 +260,7 @@
     .quote-text {
       font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400;
       font-style: italic; color: #3D3830; line-height: 1.7;
+      overflow-wrap: break-word;
     }
     .quote-attr {
       font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 3px;
@@ -308,6 +304,15 @@
       font-family: 'Outfit', sans-serif; font-size: 11px;
       color: rgba(140,133,123,0.5); text-align: center;
     }
+    /* ── TABLET ── */
+    @media (max-width: 1024px) {
+      .hero-content { padding: 50px 40px 40px; }
+      .service-copy { padding: 50px 48px; }
+      .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .story-inner { gap: 40px; }
+      #story .story-inner img { width: 220px; height: 280px; }
+    }
+
     /* ── MOBILE ── */
     @media (max-width: 768px) {
 
@@ -323,14 +328,17 @@
         z-index: 99;
       }
       .nav-links.open a {
-        font-size: 15px; letter-spacing: 3px; padding: 18px 0;
-        border-bottom: 1px solid rgba(140,133,123,0.15); width: 200px; text-align: center;
+        font-size: 15px; letter-spacing: 3px; padding: 18px 24px;
+        border-bottom: 1px solid rgba(140,133,123,0.15); width: 260px; text-align: center;
         opacity: 1;
       }
       .nav-links.open a:last-child { border-bottom: none; }
       .burger {
-        display: flex; flex-direction: column; gap: 5px;
-        cursor: pointer; z-index: 101; padding: 4px;
+        display: flex !important; flex-direction: column; gap: 5px;
+        cursor: pointer; z-index: 101;
+        padding: 12px; margin: -12px;
+        min-width: 44px; min-height: 44px;
+        align-items: center; justify-content: center;
       }
       .burger span {
         display: block; width: 24px; height: 1.5px;
@@ -342,16 +350,15 @@
       .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
       .nav-logo { font-size: 18px; }
       .nav-logo span { font-size: 13px; }
-      .burger { display: flex !important; }
 
       /* HERO */
       #hero { min-height: 100svh; }
-      .hero-content { padding: 40px 24px 40px; }
+      .hero-content { padding: 40px 24px; max-width: 100%; }
       .hero-eyebrow { font-size: 10px; letter-spacing: 4px; margin-bottom: 20px; }
-      .hero-h1 { font-size: clamp(38px, 11vw, 56px); }
+      .hero-h1 { font-size: clamp(32px, 9vw, 48px); }
       .hero-sub { font-size: 14px; margin-top: 20px; }
       .hero-btns { flex-direction: column; align-items: center; gap: 12px; margin-top: 32px; }
-      .btn-primary, .btn-ghost { width: 100%; max-width: 280px; text-align: center; padding: 14px 24px; }
+      .btn-primary, .btn-ghost { width: 100%; max-width: 280px; text-align: center; padding: 16px 24px; min-height: 48px; }
 
       /* TRUST BAR */
       #trust-bar { padding: 60px 24px; gap: 40px; }
@@ -361,38 +368,70 @@
       /* SERVICE BLOCKS */
       .service-block,
       .service-block.flipped { flex-direction: column; }
-      .service-img { min-height: 280px; }
-      .service-copy { padding: 40px 24px; }
-      .service-h2 { font-size: 30px; }
+      .service-img { min-height: 240px; }
+      .service-copy { padding: 36px 24px; }
+      .service-h2 { font-size: 28px; }
       .service-p { font-size: 14px; max-width: 100%; }
+      .service-cta { padding: 12px 0; min-height: 44px; display: inline-flex; align-items: center; }
 
       /* FEATURED PROJECTS */
-      #featured { padding: 70px 20px; }
-      .section-h2-light { font-size: 34px; }
-      .projects-grid { grid-template-columns: 1fr; gap: 40px; }
+      #featured { padding: 60px 24px; }
+      .section-h2-light { font-size: 30px; }
+      .projects-grid { grid-template-columns: 1fr; gap: 36px; }
+      .project-row { flex-wrap: wrap; gap: 8px; }
+      .project-name { font-size: 20px; }
+      .project-meta { font-size: 12px; }
+      .view-all-link { padding: 12px 24px; min-height: 48px; display: inline-flex; align-items: center; }
 
       /* STORY */
-      #story { padding: 70px 24px; }
-      .story-inner { flex-direction: column; gap: 36px; }
-      .story-inner img { width: 100% !important; height: 300px !important; }
-      .story-h2 { font-size: 28px; }
+      #story { padding: 60px 24px; }
+      .story-inner { flex-direction: column; gap: 32px; align-items: flex-start; }
+      .story-inner img { width: 100% !important; height: 260px !important; flex-shrink: 1 !important; }
+      .story-h2 { font-size: 26px; }
       .story-p { font-size: 14px; }
+      .story-cta { padding: 12px 0; min-height: 44px; display: inline-flex; align-items: center; }
 
       /* TESTIMONIAL */
-      #testimonial { padding: 70px 24px; }
-      .quote-text { font-size: 20px; }
+      #testimonial { padding: 60px 24px; }
+      .quote-text { font-size: 19px; }
 
       /* CTA */
-      #cta-block { padding: 70px 24px; }
-      .cta-h2 { font-size: 34px; }
+      #cta-block { padding: 60px 24px; }
+      .cta-h2 { font-size: 30px; }
       .cta-p { font-size: 14px; }
       #cta-block .btn-primary { display: block; max-width: 280px; margin: 0 auto; text-align: center; }
 
       /* FOOTER */
       footer { padding: 48px 24px 32px; }
       .footer-inner { flex-direction: column; gap: 32px; }
-      .footer-links { gap: 16px 24px; }
+      .footer-links { flex-direction: column; gap: 4px; }
+      .footer-links a { padding: 10px 0; display: block; min-height: 44px; line-height: 24px; }
       .footer-bottom { margin-top: 28px; }
+    }
+
+    /* ── SMALL MOBILE ── */
+    @media (max-width: 480px) {
+      nav { padding: 14px 16px; }
+      nav.scrolled { padding: 12px 16px; }
+      .nav-logo { font-size: 16px; }
+      .nav-logo span { font-size: 12px; letter-spacing: 2px; }
+      .hero-content { padding: 32px 16px; }
+      .hero-eyebrow { font-size: 9px; letter-spacing: 3px; }
+      .hero-h1 { font-size: clamp(28px, 8vw, 40px); }
+      .hero-sub { font-size: 13px; }
+      #trust-bar { padding: 48px 16px; gap: 32px; }
+      .trust-number { font-size: 32px; }
+      .service-copy { padding: 32px 16px; }
+      .service-h2 { font-size: 26px; }
+      #featured { padding: 48px 16px; }
+      .section-h2-light { font-size: 26px; }
+      #story { padding: 48px 16px; }
+      .story-h2 { font-size: 24px; }
+      #testimonial { padding: 48px 16px; }
+      .quote-text { font-size: 17px; }
+      #cta-block { padding: 48px 16px; }
+      .cta-h2 { font-size: 26px; }
+      footer { padding: 40px 16px 28px; }
     }
   </style>
 </head>
@@ -400,7 +439,7 @@
 
   <!-- NAV -->
   <nav id="main-nav">
-    <a href="#hero" class="nav-logo" style="text-decoration:none;">Otto <span>Design + Build</span></a>
+    <a href="#hero" class="nav-logo">Otto <span>Design + Build</span></a>
     <div class="nav-links" id="nav-links">
       <a href="custom-homes.html">Custom Homes</a>
       <a href="spec-homes.html">Spec Homes</a>
@@ -450,7 +489,7 @@
 
   <!-- SERVICE: CUSTOM HOMES -->
   <section class="service-block">
-    <div class="service-img" style="background-image:url('service-custom.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="service-img" style="background-image:url('service-custom.jpg');"></div>
     <div class="service-copy">
       <div class="fade-init fade-left">
         <div class="service-eyebrow">Services</div>
@@ -463,7 +502,7 @@
 
   <!-- SERVICE: SPEC HOMES -->
   <section class="service-block flipped">
-    <div class="service-img" style="background-image:url('service-spec.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="service-img" style="background-image:url('service-spec.jpg');"></div>
     <div class="service-copy">
       <div class="fade-init fade-right">
         <div class="service-eyebrow">Services</div>
@@ -482,7 +521,7 @@
     </div>
     <div class="projects-grid">
 
-      <a href="portfolio.html#rockmoor" class="project-card fade-init fade-up" data-delay="0" style="text-decoration:none;color:inherit;">
+      <a href="portfolio.html#rockmoor" class="project-card fade-init fade-up" data-delay="0">
         <div class="project-thumb"><div class="project-thumb-inner" style="background-image:url('project-rockmoor.jpg')"></div></div>
         <div class="project-row">
           <div class="project-name">Rockmoor</div>
@@ -490,7 +529,7 @@
         <div class="project-meta">Tarrytown · 4 BD / 4 BA · 3,690 SF</div>
       </a>
 
-      <a href="portfolio.html#bridle-path" class="project-card fade-init fade-up" data-delay="0.15" style="text-decoration:none;color:inherit;">
+      <a href="portfolio.html#bridle-path" class="project-card fade-init fade-up" data-delay="0.15">
         <div class="project-thumb"><div class="project-thumb-inner" style="background-image:url('project-bridle-path.jpg')"></div></div>
         <div class="project-row">
           <div class="project-name">Bridle Path</div>
@@ -498,7 +537,7 @@
         <div class="project-meta">Tarrytown · 6 BD / 5.5 BA · 4,767 SF</div>
       </a>
 
-      <a href="portfolio.html#comal" class="project-card fade-init fade-up" data-delay="0.3" style="text-decoration:none;color:inherit;">
+      <a href="portfolio.html#comal" class="project-card fade-init fade-up" data-delay="0.3">
         <div class="project-thumb"><div class="project-thumb-inner" style="background-image:url('project-comal.jpg')"></div></div>
         <div class="project-row">
           <div class="project-name">Comal</div>
@@ -553,10 +592,10 @@
   <footer>
     <div class="footer-inner">
       <div>
-        <img src="footer-logo.png" alt="Otto Design + Build" style="height:52px; opacity:0.9; margin-bottom:14px; display:block;" />
+        <img src="otto-logo-white.png" alt="Otto Design + Build" style="height:52px; opacity:0.9; margin-bottom:14px; display:block;" />
         <div class="footer-info">
           Austin & Dallas–Fort Worth, Texas<br>
-          <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="771e19111837180303181312041e101916191315021e1b135914181a">[email&#160;protected]</a><br>
+          info@ottodesignandbuild.com<br>
           (512) 555-0100
         </div>
       </div>
@@ -572,7 +611,7 @@
     <div class="footer-bottom">© 2026 Otto Design + Build. All rights reserved.</div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     // ── Burger menu ──
     const burger = document.getElementById('burger');
     const navLinks = document.getElementById('nav-links');

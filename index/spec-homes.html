@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="otto-logo-favicon.png" />
   <title>Spec Homes | Otto Design + Build</title>
   <meta name="description" content="Move-in ready homes in Austin and DFW built to the same standard as our custom work. Otto Design + Build spec homes, designed with intention, built like we're keeping them." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -11,14 +12,13 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { background: #F5F0EB; }
+    body { background: #F5F0EB; overflow-x: hidden; }
     a { text-decoration: none; }
     a:hover { opacity: 0.85; }
     ::selection { background: rgba(92,90,69,0.25); }
 
     .fade-init { opacity: 0; transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1); }
     .fade-up { transform: translateY(40px); }
-    .fade-down { transform: translateY(-40px); }
     .fade-left { transform: translateX(40px); }
     .fade-right { transform: translateX(-40px); }
     .fade-visible { opacity: 1 !important; transform: none; }
@@ -34,7 +34,7 @@
     .nav-links a.active { opacity: 1; border-bottom: 1px solid rgba(245,240,235,0.5); padding-bottom: 2px; }
 
     /* ── PAGE HERO ── */
-    .page-hero { position: relative; height: 65vh; min-height: 500px; background: url('hero-spec.jpg') center/cover no-repeat; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .page-hero { position: relative; height: 65vh; min-height: 500px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(26,26,24,0.4) 0%, rgba(26,26,24,0.55) 50%, rgba(26,26,24,0.7) 100%); }
     .page-hero-content { position: relative; z-index: 2; text-align: center; max-width: 700px; padding: 60px 40px; }
     .page-hero-eyebrow { font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 6px; text-transform: uppercase; color: rgba(245,240,235,0.7); margin-bottom: 24px; }
@@ -65,7 +65,8 @@
     .available-card-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: #F5F0EB; margin-bottom: 6px; }
     .available-card-meta { font-family: 'Outfit', sans-serif; font-size: 13px; color: #8C857B; font-weight: 300; line-height: 1.6; }
     .available-card-price { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: #F5F0EB; margin-top: 16px; }
-    .available-card-cta { display: inline-block; margin-top: 16px; font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #F5F0EB; font-weight: 400; border-bottom: 1px solid rgba(245,240,235,0.3); padding-bottom: 3px; }
+    .available-card-cta { display: inline-block; margin-top: 16px; font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #F5F0EB; font-weight: 400; border-bottom: 1px solid rgba(245,240,235,0.3); padding-bottom: 3px; transition: border-color 0.3s, opacity 0.3s; }
+    .available-card-cta:hover { opacity: 1; border-color: rgba(245,240,235,0.7); }
 
     /* ── DIFFERENCE ── */
     .diff-section { background: #F5F0EB; padding: 100px 40px; }
@@ -73,7 +74,7 @@
     .diff-header { text-align: center; margin-bottom: 60px; }
     .diff-h2 { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 400; color: #1A1A18; line-height: 1.2; }
     .diff-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 40px; }
-    .diff-item {}
+
     .diff-number { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: rgba(92,90,69,0.25); margin-bottom: 16px; }
     .diff-item-h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: #1A1A18; margin-bottom: 12px; }
     .diff-item-p { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 300; color: #8C857B; line-height: 1.8; }
@@ -83,8 +84,8 @@
     .gallery-header { text-align: center; margin-bottom: 60px; }
     .gallery-h2 { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 400; color: #1A1A18; }
     .gallery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
-    .gallery-card { cursor: pointer; transition: transform 0.5s cubic-bezier(0.22,1,0.36,1); }
-    .gallery-card:hover { transform: translateY(-8px); }
+    .gallery-card { transition: transform 0.5s cubic-bezier(0.22,1,0.36,1); }
+    .gallery-card:hover { transform: translateY(-4px); }
     .gallery-thumb { aspect-ratio: 4/3; background: linear-gradient(160deg, rgba(61,56,48,0.15) 0%, rgba(92,90,69,0.08) 100%); background-size: cover; background-position: center; border-radius: 2px; margin-bottom: 16px; }
     .gallery-card-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: #1A1A18; }
     .gallery-card-meta { font-family: 'Outfit', sans-serif; font-size: 13px; color: #8C857B; font-weight: 300; margin-top: 4px; }
@@ -116,33 +117,47 @@
     .footer-links a:hover { color: #FEFDFB; }
     .footer-bottom { max-width: 1200px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid rgba(140,133,123,0.1); font-family: 'Outfit', sans-serif; font-size: 11px; color: rgba(140,133,123,0.5); text-align: center; }
 
+    /* ── BURGER (hidden on desktop) ── */
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 201; padding: 10px; }
+    .burger span { display: block; width: 24px; height: 1.5px; background: #FEFDFB; transition: all 0.3s ease; }
+    .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
     /* ── MOBILE ── */
     @media (max-width: 768px) {
       nav { padding: 18px 20px; }
       nav.scrolled { padding: 14px 20px; }
       .nav-links { display: none; }
-      .nav-links.open { display: flex; flex-direction: column; gap: 0; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(26,26,24,0.98); justify-content: center; align-items: center; z-index: 99; }
-      .nav-links.open a { font-size: 15px; letter-spacing: 3px; padding: 18px 0; border-bottom: 1px solid rgba(140,133,123,0.15); width: 200px; text-align: center; opacity: 1; }
-      .burger { display: flex !important; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; padding: 4px; }
-      .burger span { display: block; width: 24px; height: 1.5px; background: #FEFDFB; transition: all 0.3s ease; }
-      .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-      .burger.open span:nth-child(2) { opacity: 0; }
-      .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+      .nav-links.open { display: flex; flex-direction: column; gap: 0; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(26,26,24,0.98); justify-content: center; align-items: center; z-index: 200; }
+      .nav-links.open a { font-size: 15px; letter-spacing: 3px; padding: 18px 0; border-bottom: 1px solid rgba(140,133,123,0.15); width: 200px; text-align: center; opacity: 1; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+      .burger { display: flex; }
+      body.nav-open { overflow: hidden; }
 
       .page-hero { height: 55vh; min-height: 400px; }
       .page-hero-content { padding: 40px 24px; }
       .page-hero-h1 { font-size: clamp(32px,9vw,48px); }
+      .page-hero-sub { font-size: 15px; }
 
       .intro-section { padding: 70px 24px; }
       .intro-h2 { font-size: 30px; }
+      .intro-p { font-size: 14px; }
 
       .available-section { padding: 70px 20px; }
       .available-grid { grid-template-columns: 1fr; }
+      .available-card-name { font-size: 22px; }
+      .available-card-meta { font-size: 12px; }
+      .available-card-price { font-size: 20px; }
+      .available-card-body { padding: 24px; }
+      .available-card-cta { padding: 12px 0 4px; min-height: 44px; display: inline-flex; align-items: center; }
       .section-h2-light { font-size: 34px; }
 
       .diff-section { padding: 70px 24px; }
       .diff-grid { grid-template-columns: 1fr; gap: 32px; }
       .diff-h2 { font-size: 30px; }
+      .diff-number { font-size: 40px; }
+      .diff-item-h3 { font-size: 22px; }
+      .diff-item-p { font-size: 13px; }
 
       .gallery-section { padding: 70px 20px; }
       .gallery-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -153,9 +168,13 @@
 
       .cta-section { padding: 70px 24px; }
       .cta-h2 { font-size: 34px; }
+      .cta-p { font-size: 14px; }
+      .btn-primary { display: block; width: 100%; max-width: 320px; margin: 0 auto; text-align: center; padding: 16px 36px; min-height: 48px; }
 
       footer { padding: 48px 24px 32px; }
       .footer-inner { flex-direction: column; gap: 32px; }
+      .footer-links { flex-direction: column; gap: 16px; align-items: flex-start; }
+      .footer-links a { font-size: 13px; padding: 8px 0; min-height: 44px; display: inline-flex; align-items: center; }
     }
   </style>
 </head>
@@ -172,13 +191,13 @@
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </div>
-    <div class="burger" id="burger" style="display:none;">
+    <div class="burger" id="burger">
       <span></span><span></span><span></span>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section class="page-hero" style="background-image:url('hero-spec.jpg');">
+  <section class="page-hero" style="background:url('service-spec.jpg') center/cover no-repeat;">
     <div class="page-hero-overlay"></div>
     <div class="page-hero-content">
       <div class="page-hero-eyebrow fade-init fade-up" data-delay="0.3">Spec Homes</div>
@@ -206,25 +225,25 @@
     </div>
     <div class="available-grid">
       <div class="available-card fade-init fade-up" data-delay="0">
-        <div class="available-card-img" style="background-image:url('spec-available-1.jpg');">
+        <div class="available-card-img" style="background-image:url('../images/stadium/01.jpg');">
           <div class="available-badge badge-available">Available</div>
         </div>
         <div class="available-card-body">
           <div class="available-card-name">The Ridgeline</div>
           <div class="available-card-meta">East Austin · 3 BD / 2.5 BA · 2,200 SF<br>Modern farmhouse with standing seam roof, white oak throughout</div>
           <div class="available-card-price">$625,000</div>
-          <a href="#" class="available-card-cta">View Home →</a>
+          <a href="contact.html" class="available-card-cta">View Home →</a>
         </div>
       </div>
       <div class="available-card fade-init fade-up" data-delay="0.15">
-        <div class="available-card-img" style="background-image:url('spec-available-2.jpg');">
+        <div class="available-card-img" style="background-image:url('../images/crestwood/01.jpg');">
           <div class="available-badge badge-construction">Under Construction</div>
         </div>
         <div class="available-card-body">
           <div class="available-card-name">The Elgin</div>
           <div class="available-card-meta">South Austin · 4 BD / 3 BA · 2,800 SF<br>Contemporary hill country with courtyard entry, expected Q3 2026</div>
           <div class="available-card-price">$780,000</div>
-          <a href="#" class="available-card-cta">Follow Progress →</a>
+          <a href="contact.html" class="available-card-cta">Follow Progress →</a>
         </div>
       </div>
     </div>
@@ -265,17 +284,17 @@
     </div>
     <div class="gallery-grid">
       <div class="gallery-card fade-init fade-up" data-delay="0">
-        <div class="gallery-thumb" style="background-image:url('spec-past-1.jpg');"></div>
+        <div class="gallery-thumb" style="background-image:url('../images/comal/01.jpg');"></div>
         <div class="gallery-card-name">Comal</div>
         <div class="gallery-card-meta">East Austin · 3 BD / 2.5 BA · 2,400 SF</div>
       </div>
       <div class="gallery-card fade-init fade-up" data-delay="0.15">
-        <div class="gallery-thumb" style="background-image:url('spec-past-2.jpg');"></div>
+        <div class="gallery-thumb" style="background-image:url('../images/bridle-path/01.png');"></div>
         <div class="gallery-card-name">Bridle Path</div>
         <div class="gallery-card-meta">Central Austin · 4 BD / 3 BA · 2,800 SF</div>
       </div>
       <div class="gallery-card fade-init fade-up" data-delay="0.3">
-        <div class="gallery-thumb" style="background-image:url('spec-past-3.jpg');"></div>
+        <div class="gallery-thumb" style="background-image:url('../images/spring/01.JPG');"></div>
         <div class="gallery-card-name">Slaughter Creek</div>
         <div class="gallery-card-meta">South Austin · 3 BD / 2 BA · 2,100 SF</div>
       </div>
@@ -303,7 +322,7 @@
     <div class="fade-init fade-up" style="max-width:600px; margin:0 auto;">
       <h2 class="cta-h2">Interested in an<br>available home?</h2>
       <p class="cta-p">Schedule a walkthrough or get on our list for upcoming builds. No pressure, just a conversation about what's available and what's coming next.</p>
-      <a href="contact.html" class="btn-primary">← Get In Touch</a>
+      <a href="contact.html" class="btn-primary">Get In Touch →</a>
     </div>
   </section>
 
@@ -311,7 +330,7 @@
   <footer>
     <div class="footer-inner">
       <div>
-        <div class="footer-logo">Otto <span>Design + Build</span></div>
+        <img src="otto-logo-white.png" alt="Otto Design + Build" style="height:52px; opacity:0.9; margin-bottom:14px; display:block;" />
         <div class="footer-info">Austin & Dallas–Fort Worth, Texas<br>info@ottodesignandbuild.com<br>(512) 555-0100</div>
       </div>
       <div class="footer-links">
@@ -329,8 +348,8 @@
   <script>
     const burger = document.getElementById('burger');
     const navLinks = document.getElementById('nav-links');
-    burger.addEventListener('click', () => { burger.classList.toggle('open'); navLinks.classList.toggle('open'); });
-    navLinks.querySelectorAll('a').forEach(a => { a.addEventListener('click', () => { burger.classList.remove('open'); navLinks.classList.remove('open'); }); });
+    burger.addEventListener('click', () => { burger.classList.toggle('open'); navLinks.classList.toggle('open'); document.body.classList.toggle('nav-open'); });
+    navLinks.querySelectorAll('a').forEach(a => { a.addEventListener('click', () => { burger.classList.remove('open'); navLinks.classList.remove('open'); document.body.classList.remove('nav-open'); }); });
     const nav = document.getElementById('main-nav');
     window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
     const faders = document.querySelectorAll('.fade-init');

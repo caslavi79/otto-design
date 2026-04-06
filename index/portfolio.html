@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="otto-logo-favicon.png" />
   <title>Portfolio | Otto Design + Build</title>
   <meta name="description" content="Browse homes built by Otto Design + Build across Austin. Each project reflects our standard — no shortcuts, no compromises." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -43,7 +44,7 @@
     }
     .nav-links a:hover { opacity: 1; }
     .nav-links a.active { opacity: 1; }
-    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; padding: 4px; }
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; padding: 10px; min-width: 44px; min-height: 44px; justify-content: center; align-items: center; }
     .burger span { display: block; width: 24px; height: 1.5px; background: #FEFDFB; transition: all 0.3s ease; }
     .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
     .burger.open span:nth-child(2) { opacity: 0; }
@@ -65,7 +66,7 @@
       padding: 0 48px 64px;
       display: flex; justify-content: space-between; align-items: flex-end; gap: 40px;
     }
-    .page-hero-left {}
+    .page-hero-left { /* layout container */ }
     .page-hero-eyebrow {
       font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 5px;
       text-transform: uppercase; color: rgba(245,240,235,0.55); margin-bottom: 16px;
@@ -84,33 +85,6 @@
       background: rgba(245,240,235,0.08);
     }
 
-    /* ── PROJECT COUNT BAR ── */
-    .count-bar {
-      padding: 28px 48px; background: #F5F0EB;
-      border-bottom: 1px solid rgba(61,56,48,0.08);
-    }
-    .count-bar-inner {
-      max-width: 1400px; margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .count-text {
-      font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 2px;
-      text-transform: uppercase; color: #8C857B; font-weight: 400;
-    }
-    .count-text strong {
-      color: #1A1A18; font-weight: 500;
-    }
-    .filter-pills { display: flex; gap: 8px; }
-    .filter-pill {
-      padding: 7px 18px; border: 1px solid rgba(61,56,48,0.15);
-      background: transparent; font-family: 'Outfit', sans-serif; font-size: 11px;
-      letter-spacing: 1.5px; text-transform: uppercase; color: #8C857B;
-      cursor: pointer; transition: all 0.3s; border-radius: 1px;
-    }
-    .filter-pill:hover, .filter-pill.active {
-      background: #1A1A18; color: #F5F0EB; border-color: #1A1A18;
-    }
-
     /* ── PORTFOLIO GRID ── */
     .portfolio-section { background: #F5F0EB; padding: 32px 48px 120px; }
     .portfolio-grid {
@@ -121,8 +95,7 @@
     .portfolio-card {
       cursor: pointer; position: relative; overflow: hidden; border-radius: 2px;
     }
-    .portfolio-card.featured {
-    }
+    .portfolio-card.featured { /* marker class for JS/layout */ }
     .portfolio-thumb {
       position: absolute; inset: 0; background-size: cover; background-position: center;
       background-color: #E8E2DA;
@@ -143,7 +116,7 @@
       position: absolute; bottom: 0; left: 0; right: 0; padding: 28px; z-index: 3;
       display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
     }
-    .portfolio-card-text {}
+    .portfolio-card-text { /* layout container */ }
     .portfolio-name {
       font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400;
       color: #FEFDFB; line-height: 1.15;
@@ -186,7 +159,7 @@
       color: rgba(245,240,235,0.7); text-transform: uppercase;
     }
     .modal-close {
-      width: 38px; height: 38px; background: rgba(26,26,24,0.5);
+      width: 44px; height: 44px; background: rgba(26,26,24,0.5);
       border: none; border-radius: 50%; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       transition: background 0.3s; backdrop-filter: blur(4px);
@@ -213,14 +186,17 @@
     .carousel-next { right: 16px; }
     .carousel-dots {
       position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
-      display: flex; gap: 6px; z-index: 5;
+      display: flex; gap: 0; z-index: 5;
     }
     .carousel-dot {
-      width: 7px; height: 7px; border-radius: 50%;
+      width: 8px; height: 8px; border-radius: 50%;
       background: rgba(255,255,255,0.35); border: none;
-      cursor: pointer; transition: all 0.3s; padding: 0;
+      cursor: pointer; transition: all 0.3s;
+      padding: 0; box-sizing: content-box;
+      /* 44px min tap target via transparent border */
+      border: 18px solid transparent; background-clip: padding-box;
     }
-    .carousel-dot.active { background: #FEFDFB; transform: scale(1.3); }
+    .carousel-dot.active { background: #FEFDFB; background-clip: padding-box; transform: scale(1.15); }
 
     .modal-content { padding: 36px 40px 44px; }
     .modal-location {
@@ -267,39 +243,34 @@
 
     /* ── FOOTER ── */
     footer {
-      background: #1A1A18; padding: 64px 48px 40px;
-      border-top: 1px solid rgba(140,133,123,0.08);
+      background: #1A1A18; padding: 60px 40px 40px;
+      border-top: 1px solid rgba(140,133,123,0.15);
     }
     .footer-inner {
-      max-width: 1400px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: start;
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: start;
+      flex-wrap: wrap; gap: 40px;
     }
-    .footer-logo {
-      font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600;
-      color: #FEFDFB; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px;
-    }
-    .footer-logo span { font-weight: 300; font-size: 14px; letter-spacing: 3px; opacity: 0.6; }
     .footer-info {
-      font-family: 'Outfit', sans-serif; font-size: 13px; color: rgba(140,133,123,0.6);
-      font-weight: 300; line-height: 1.8;
+      font-family: 'Outfit', sans-serif; font-size: 13px; color: #8C857B;
+      font-weight: 300; line-height: 1.7;
     }
-    .footer-info a { color: rgba(140,133,123,0.6); transition: color 0.3s; }
+    .footer-info a { color: #8C857B; transition: color 0.3s; }
     .footer-info a:hover { color: #FEFDFB; }
-    .footer-nav { display: grid; grid-template-columns: repeat(2, auto); gap: 10px 48px; }
-    .footer-nav a {
-      font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 1.5px;
-      color: rgba(140,133,123,0.5); font-weight: 300; transition: color 0.3s;
-      text-transform: uppercase;
+    .footer-links { display: flex; gap: 32px; flex-wrap: wrap; }
+    .footer-links a {
+      font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 1px;
+      color: #8C857B; font-weight: 300; transition: color 0.3s;
     }
-    .footer-nav a:hover { color: #FEFDFB; }
+    .footer-links a:hover { color: #FEFDFB; }
     .footer-bottom {
-      max-width: 1400px; margin: 44px auto 0; padding-top: 24px;
-      border-top: 1px solid rgba(140,133,123,0.06);
+      max-width: 1200px; margin: 40px auto 0; padding-top: 24px;
+      border-top: 1px solid rgba(140,133,123,0.1);
       font-family: 'Outfit', sans-serif; font-size: 11px;
-      color: rgba(140,133,123,0.3); text-align: center; letter-spacing: 1px;
+      color: rgba(140,133,123,0.5); text-align: center;
     }
 
-    /* ── MOBILE ── */
+    /* ── TABLET ── */
     @media (max-width: 900px) {
       nav { padding: 18px 24px; }
       nav.scrolled { padding: 14px 24px; }
@@ -324,11 +295,7 @@
         padding: 0 24px 40px;
       }
       .page-hero-h1 { font-size: clamp(32px, 9vw, 48px); }
-      .page-hero-sub { font-size: 13px; }
-
-      .count-bar { padding: 20px 24px; }
-      .count-bar-inner { flex-direction: column; gap: 14px; align-items: flex-start; }
-      .filter-pills { flex-wrap: wrap; }
+      .page-hero-sub { font-size: 13px; max-width: 100%; }
 
       .portfolio-section { padding: 20px 16px 80px; }
       .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; grid-auto-rows: 240px; }
@@ -339,14 +306,65 @@
 
       .modal-box { width: 100%; max-width: 100%; max-height: 100vh; border-radius: 0; }
       .carousel { aspect-ratio: 4/3; }
+      .carousel-btn { width: 48px; height: 48px; }
       .modal-content { padding: 24px 20px 32px; }
       .modal-title { font-size: 28px; }
+      .modal-desc { font-size: 14px; }
 
       .cta-section { padding: 80px 24px; }
       .cta-h2 { font-size: 34px; }
+      .cta-p { font-size: 14px; }
 
       footer { padding: 48px 24px 32px; }
-      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .footer-inner { flex-direction: column; gap: 32px; }
+      .footer-links { flex-direction: column; gap: 4px; }
+      .footer-links a { padding: 10px 0; display: inline-block; }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .portfolio-grid { grid-template-columns: 1fr; grid-auto-rows: 280px; gap: 12px; }
+      .portfolio-name { font-size: 20px; }
+      .portfolio-card-info { padding: 20px; }
+    }
+
+    /* ── SMALL MOBILE ── */
+    @media (max-width: 480px) {
+      nav { padding: 14px 16px; }
+      nav.scrolled { padding: 12px 16px; }
+      .nav-logo { font-size: 18px; }
+      .nav-logo span { font-size: 12px; }
+
+      .page-hero { height: 36vh; min-height: 280px; }
+      .page-hero-content { padding: 0 16px 32px; gap: 12px; }
+      .page-hero-h1 { font-size: clamp(28px, 8vw, 40px); }
+      .page-hero-sub { font-size: 12px; }
+      .page-hero-eyebrow { font-size: 10px; letter-spacing: 3px; }
+
+      .portfolio-section { padding: 16px 12px 60px; }
+      .portfolio-grid { grid-auto-rows: 240px; gap: 10px; }
+      .portfolio-card-info { padding: 16px; }
+      .portfolio-name { font-size: 18px; }
+
+      .carousel { aspect-ratio: 3/2; }
+      .carousel-btn { width: 44px; height: 44px; }
+      .carousel-prev { left: 8px; }
+      .carousel-next { right: 8px; }
+      .modal-content { padding: 20px 16px 28px; }
+      .modal-title { font-size: 24px; }
+      .modal-desc { font-size: 13px; line-height: 1.7; }
+      .modal-header { padding: 14px 16px; }
+
+      .cta-section { padding: 60px 16px; }
+      .cta-h2 { font-size: 28px; }
+      .cta-p { font-size: 13px; }
+      .btn-primary { padding: 16px 32px; font-size: 10px; min-height: 44px; }
+
+      footer { padding: 36px 16px 24px; }
+      .footer-inner { gap: 24px; }
+      .footer-links { flex-wrap: wrap; gap: 10px 20px; }
+      .footer-info { font-size: 12px; }
+      .footer-bottom { font-size: 10px; margin-top: 32px; }
     }
   </style>
 </head>
@@ -380,8 +398,6 @@
     </div>
     <div class="hero-bottom-fade"></div>
   </section>
-
-
   <!-- PROJECTS -->
   <section class="portfolio-section">
     <div class="portfolio-grid" id="portfolio-grid"></div>
@@ -406,6 +422,7 @@
         <div class="carousel-dots" id="carousel-dots"></div>
       </div>
       <div class="modal-content">
+        <div class="modal-location" id="modal-location"></div>
         <h2 class="modal-title" id="modal-title"></h2>
         <p class="modal-desc" id="modal-desc"></p>
       </div>
@@ -426,17 +443,17 @@
   <footer>
     <div class="footer-inner">
       <div>
-        <div class="footer-logo">Otto <span>Design + Build</span></div>
+        <img src="otto-logo-white.png" alt="Otto Design + Build" style="height:52px; opacity:0.9; margin-bottom:14px; display:block;" />
         <div class="footer-info">
           Austin & Dallas–Fort Worth, Texas<br>
-          <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="630a0d050c230c17170c0706100a040d01160a0f074d000c0e">[email&#160;protected]</a><br>
+          info@ottodesignandbuild.com<br>
           (512) 555-0100
         </div>
       </div>
-      <div class="footer-nav">
+      <div class="footer-links">
         <a href="custom-homes.html">Custom Homes</a>
-        <a href="portfolio.html">Portfolio</a>
         <a href="spec-homes.html">Spec Homes</a>
+        <a href="portfolio.html">Portfolio</a>
         <a href="process.html">Process</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
@@ -445,7 +462,7 @@
     <div class="footer-bottom">&copy; 2026 Otto Design + Build. All rights reserved.</div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     // ── PROJECT DATA ──
     const projects = [
       {
@@ -466,7 +483,7 @@
       {
         folder: 'bridle-path',
         name: 'Bridle Path',
-        location: 'Central Austin',
+        location: 'Tarrytown, Austin',
         featured: true,
         desc: 'Modern farmhouse with clean lines, open living, and a covered back patio. White oak floors throughout and a kitchen built for actual cooking.',
         images: ['01.png','02.png','03.jpg','04.jpg','05.jpg','06.jpg','07.jpg','08.jpg','09.jpg','10.jpg','11.jpg','12.jpg','13.jpg','14.jpg','15.jpg','16.jpg','17.jpg','18.jpg','19.jpg','20.jpg','21.jpg']
@@ -588,7 +605,7 @@
           <div class="portfolio-card-info">
             <div class="portfolio-card-text">
               <div class="portfolio-name">${p.name}</div>
-
+              <div class="portfolio-location">${p.location}</div>
             </div>
             <div class="portfolio-view-btn">
               <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -617,6 +634,7 @@
     const modalBox = document.getElementById('modal-box');
     const carousel = document.getElementById('carousel');
     const dotsContainer = document.getElementById('carousel-dots');
+    const locationEl = document.getElementById('modal-location');
     const titleEl = document.getElementById('modal-title');
     const descEl = document.getElementById('modal-desc');
     const counterEl = document.getElementById('modal-counter');
@@ -627,6 +645,7 @@
       const p = projects[index];
       currentImages = p.images;
       currentSlide = 0;
+      locationEl.textContent = p.location;
       titleEl.textContent = p.name;
       descEl.textContent = p.desc;
       updateCounter();

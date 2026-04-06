@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="otto-logo-favicon.png" />
   <title>Custom Homes | Otto Design + Build | Austin & DFW Custom Home Builder</title>
   <meta name="description" content="Design and build your custom home with Otto Design + Build. One team from first sketch to final walkthrough, serving Austin and Dallas–Fort Worth, Texas." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -11,7 +12,7 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { background: #F5F0EB; }
+    body { background: #F5F0EB; overflow-x: hidden; }
     a { text-decoration: none; }
     a:hover { opacity: 0.85; }
     ::selection { background: rgba(92,90,69,0.25); }
@@ -31,7 +32,7 @@
     .nav-links a:hover { opacity: 1; }
     .nav-links a.active { opacity: 1; border-bottom: 1px solid rgba(245,240,235,0.5); padding-bottom: 2px; }
 
-    .page-hero { position: relative; height: 70vh; min-height: 550px; background: url('hero-custom.jpg') center/cover no-repeat; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .page-hero { position: relative; height: 70vh; min-height: 550px; background-size: cover; background-position: center; background-repeat: no-repeat; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(26,26,24,0.35) 0%, rgba(26,26,24,0.5) 50%, rgba(26,26,24,0.7) 100%); }
     .page-hero-content { position: relative; z-index: 2; text-align: center; max-width: 750px; padding: 60px 40px; }
     .page-hero-eyebrow { font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 6px; text-transform: uppercase; color: rgba(245,240,235,0.7); margin-bottom: 24px; }
@@ -63,7 +64,7 @@
     .diff-row-p { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 300; color: #8C857B; line-height: 1.85; }
 
     /* ── IMAGE BREAK ── */
-    .image-break { height: 500px; background: url('custom-detail.jpg') center/cover no-repeat; position: relative; }
+    .image-break { height: 500px; background-size: cover; background-position: center; background-repeat: no-repeat; position: relative; }
     .image-break-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(245,240,235,0.15) 0%, rgba(245,240,235,0.6) 100%); }
 
     /* ── CUSTOM GALLERY ── */
@@ -71,7 +72,7 @@
     .gallery-header { text-align: center; margin-bottom: 60px; }
     .gallery-h2 { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 400; color: #1A1A18; }
     .gallery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
-    .gallery-card { cursor: pointer; transition: transform 0.5s cubic-bezier(0.22,1,0.36,1); }
+    .gallery-card { display: block; cursor: pointer; transition: transform 0.5s cubic-bezier(0.22,1,0.36,1); color: inherit; }
     .gallery-card:hover { transform: translateY(-8px); }
     .gallery-thumb { aspect-ratio: 4/3; background: linear-gradient(160deg, rgba(61,56,48,0.15) 0%, rgba(92,90,69,0.08) 100%); background-size: cover; background-position: center; border-radius: 2px; margin-bottom: 16px; }
     .gallery-card-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: #1A1A18; }
@@ -119,36 +120,57 @@
       .nav-links { display: none; }
       .nav-links.open { display: flex; flex-direction: column; gap: 0; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(26,26,24,0.98); justify-content: center; align-items: center; z-index: 99; }
       .nav-links.open a { font-size: 15px; letter-spacing: 3px; padding: 18px 0; border-bottom: 1px solid rgba(140,133,123,0.15); width: 200px; text-align: center; opacity: 1; }
-      .burger { display: flex !important; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; padding: 4px; }
+      .nav-links.open a:last-child { border-bottom: none; }
+      .nav-logo { font-size: 18px; }
+      .nav-logo span { font-size: 13px; }
+      .burger { display: flex !important; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; padding: 10px; margin: -10px -6px; }
       .burger span { display: block; width: 24px; height: 1.5px; background: #FEFDFB; transition: all 0.3s ease; }
       .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
       .burger.open span:nth-child(2) { opacity: 0; }
       .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+      body.nav-open { overflow: hidden; }
 
       .page-hero { height: 60vh; min-height: 450px; }
       .page-hero-content { padding: 40px 24px; }
       .page-hero-h1 { font-size: clamp(34px,10vw,52px); }
+      .page-hero-sub { font-size: 15px; }
+      .hero-btn { padding: 16px 36px; min-height: 48px; }
+
       .intro-section { padding: 70px 24px; }
       .intro-h2 { font-size: 30px; }
+      .intro-p { font-size: 14px; }
       .diff-section { padding: 70px 20px; }
       .diff-row { flex-direction: column; }
-      .diff-row-img { min-height: 220px; }
+      .diff-row-img { min-height: 220px; order: -1; }
       .diff-row-copy { padding: 32px 24px; }
+      .diff-row-number { font-size: 44px; }
+      .diff-row-h3 { font-size: 24px; }
+      .diff-row-p { font-size: 13px; }
       .section-h2-light { font-size: 34px; }
       .image-break { height: 300px; }
       .gallery-section { padding: 70px 20px; }
       .gallery-grid { grid-template-columns: 1fr; gap: 32px; }
       .gallery-h2 { font-size: 30px; }
+      .gallery-card:hover { transform: none; }
+
       .testimonials-section { padding: 70px 24px; }
       .quote-text { font-size: 20px; }
       .process-preview { padding: 70px 24px; }
       .process-steps { flex-direction: column; gap: 24px; align-items: center; }
       .process-step::after { display: none; }
       .process-h2 { font-size: 30px; }
+      .process-cta { padding: 12px 0; }
+
       .cta-section { padding: 70px 24px; }
       .cta-h2 { font-size: 34px; }
+      .cta-p { font-size: 14px; }
+      .btn-primary { padding: 16px 36px; min-height: 48px; }
+
       footer { padding: 48px 24px 32px; }
       .footer-inner { flex-direction: column; gap: 32px; }
+      .footer-links { flex-direction: column; gap: 16px; align-items: flex-start; }
+      .footer-links a { font-size: 13px; padding: 8px 0; }
+      .footer-bottom { margin-top: 28px; }
     }
   </style>
 </head>
@@ -169,7 +191,7 @@
     </div>
   </nav>
 
-  <section class="page-hero" style="background-image:url('hero-custom.jpg');">
+  <section class="page-hero" style="background-image:url('service-custom.jpg');">
     <div class="page-hero-overlay"></div>
     <div class="page-hero-content">
       <div class="page-hero-eyebrow fade-init fade-up" data-delay="0.3">Custom Homes</div>
@@ -199,7 +221,7 @@
       </div>
       <div class="diff-blocks">
         <div class="diff-row fade-init fade-up">
-          <div class="diff-row-img" style="background-image:url('diff-design.jpg');"></div>
+          <div class="diff-row-img" style="background-image:url('hero-background.jpg');"></div>
           <div class="diff-row-copy">
             <div>
               <div class="diff-row-number">01</div>
@@ -216,10 +238,10 @@
               <p class="diff-row-p">Andrew and Peter. That's who you call, who shows up, who makes decisions on site. We don't have a sales team. We don't have a "project coordinator" buffering you from the builder. When you call, a Kveton answers.</p>
             </div>
           </div>
-          <div class="diff-row-img" style="background-image:url('diff-team.jpg');"></div>
+          <div class="diff-row-img" style="background-image:url('team-andrew-peter.jpg');"></div>
         </div>
         <div class="diff-row fade-init fade-up" data-delay="0.2">
-          <div class="diff-row-img" style="background-image:url('diff-craft.jpg');"></div>
+          <div class="diff-row-img" style="background-image:url('project-comal.jpg');"></div>
           <div class="diff-row-copy">
             <div>
               <div class="diff-row-number">03</div>
@@ -233,7 +255,7 @@
   </section>
 
   <!-- IMAGE BREAK -->
-  <div class="image-break" style="background-image:url('custom-detail.jpg');">
+  <div class="image-break" style="background-image:url('hero-portfolio.jpg');">
     <div class="image-break-overlay"></div>
   </div>
 
@@ -244,21 +266,24 @@
       <h2 class="gallery-h2">Built for someone. Built like it matters.</h2>
     </div>
     <div class="gallery-grid">
-      <div class="gallery-card fade-init fade-up" data-delay="0">
+      <a href="portfolio.html" class="gallery-card fade-init fade-up" data-delay="0">
         <div class="gallery-thumb" style="background-image:url('project-rockmoor.jpg');"></div>
         <div class="gallery-card-name">Rockmoor</div>
         <div class="gallery-card-meta">Crestwood · 4 BD / 3.5 BA · 3,200 SF</div>
-      </div>
-      <div class="gallery-card fade-init fade-up" data-delay="0.15">
-        <div class="gallery-thumb" style="background-image:url('project-westlake.jpg');"></div>
-        <div class="gallery-card-name">Westlake Hills</div>
-        <div class="gallery-card-meta">Westlake · 5 BD / 4.5 BA · 4,100 SF</div>
-      </div>
-      <div class="gallery-card fade-init fade-up" data-delay="0.3">
-        <div class="gallery-thumb" style="background-image:url('project-dripping.jpg');"></div>
-        <div class="gallery-card-name">Dripping Springs</div>
+      </a>
+      <a href="portfolio.html" class="gallery-card fade-init fade-up" data-delay="0.15">
+        <div class="gallery-thumb" style="background-image:url('project-bridle-path.jpg');"></div>
+        <div class="gallery-card-name">Bridle Path</div>
+        <div class="gallery-card-meta">Austin · 5 BD / 4.5 BA · 4,100 SF</div>
+      </a>
+      <a href="portfolio.html" class="gallery-card fade-init fade-up" data-delay="0.3">
+        <div class="gallery-thumb" style="background-image:url('project-comal.jpg');"></div>
+        <div class="gallery-card-name">Comal</div>
         <div class="gallery-card-meta">Hill Country · 4 BD / 3 BA · 3,600 SF</div>
-      </div>
+      </a>
+    </div>
+    <div style="text-align:center; margin-top:48px;">
+      <a href="portfolio.html" class="process-cta">View All Projects →</a>
     </div>
   </section>
 
@@ -315,7 +340,7 @@
   <footer>
     <div class="footer-inner">
       <div>
-        <div class="footer-logo">Otto <span>Design + Build</span></div>
+        <img src="otto-logo-white.png" alt="Otto Design + Build" style="height:52px; opacity:0.9; margin-bottom:14px; display:block;" />
         <div class="footer-info">Austin & Dallas–Fort Worth, Texas<br>info@ottodesignandbuild.com<br>(512) 555-0100</div>
       </div>
       <div class="footer-links">
@@ -333,8 +358,8 @@
   <script>
     const burger = document.getElementById('burger');
     const navLinks = document.getElementById('nav-links');
-    burger.addEventListener('click', () => { burger.classList.toggle('open'); navLinks.classList.toggle('open'); });
-    navLinks.querySelectorAll('a').forEach(a => { a.addEventListener('click', () => { burger.classList.remove('open'); navLinks.classList.remove('open'); }); });
+    burger.addEventListener('click', () => { burger.classList.toggle('open'); navLinks.classList.toggle('open'); document.body.classList.toggle('nav-open'); });
+    navLinks.querySelectorAll('a').forEach(a => { a.addEventListener('click', () => { burger.classList.remove('open'); navLinks.classList.remove('open'); document.body.classList.remove('nav-open'); }); });
     window.addEventListener('scroll', () => { document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 60); });
     const faders = document.querySelectorAll('.fade-init');
     const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { const el = entry.target; setTimeout(() => el.classList.add('fade-visible'), parseFloat(el.dataset.delay || 0) * 1000); observer.unobserve(el); } }); }, { threshold: 0.1 });

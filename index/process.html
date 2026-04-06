@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="otto-logo-favicon.png" />
   <title>Our Process | Otto Design + Build</title>
   <meta name="description" content="From first conversation to final walkthrough. How Otto Design + Build takes your custom home from vision to reality. Transparent process, no surprises." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -11,7 +12,7 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { background: #F5F0EB; }
+    body { background: #F5F0EB; overflow-x: hidden; }
     a { text-decoration: none; }
     a:hover { opacity: 0.85; }
     ::selection { background: rgba(92,90,69,0.25); }
@@ -30,8 +31,10 @@
     .nav-links a { color: #FEFDFB; font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; opacity: 0.8; transition: opacity 0.3s; }
     .nav-links a:hover { opacity: 1; }
     .nav-links a.active { opacity: 1; border-bottom: 1px solid rgba(245,240,235,0.5); padding-bottom: 2px; }
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; padding: 10px; }
+    .burger span { display: block; width: 24px; height: 1.5px; background: #FEFDFB; transition: all 0.3s ease; }
 
-    .page-hero { position: relative; height: 65vh; min-height: 500px; background: url('hero-process.jpg') center/cover no-repeat; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .page-hero { position: relative; height: 65vh; min-height: 500px; background: center/cover no-repeat; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(26,26,24,0.4) 0%, rgba(26,26,24,0.55) 50%, rgba(26,26,24,0.7) 100%); }
     .page-hero-content { position: relative; z-index: 2; text-align: center; max-width: 700px; padding: 60px 40px; }
     .page-hero-eyebrow { font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 6px; text-transform: uppercase; color: rgba(245,240,235,0.7); margin-bottom: 24px; }
@@ -78,7 +81,7 @@
     .faq-item { border-bottom: 1px solid #E8E2DA; }
     .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; cursor: pointer; }
     .faq-q-text { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: #1A1A18; flex: 1; }
-    .faq-toggle { font-family: 'Outfit', sans-serif; font-size: 20px; color: #8C857B; margin-left: 16px; transition: transform 0.3s; user-select: none; }
+    .faq-toggle { font-family: 'Outfit', sans-serif; font-size: 20px; color: #8C857B; margin-left: 16px; transition: transform 0.3s; user-select: none; min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
     .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; }
     .faq-a-inner { padding: 0 0 24px; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 300; color: #8C857B; line-height: 1.85; }
     .faq-item.open .faq-a { max-height: 300px; }
@@ -88,8 +91,8 @@
     .cta-section { background: #E8E2DA; padding: 100px 40px; text-align: center; }
     .cta-h2 { font-family: 'Cormorant Garamond', serif; font-size: 44px; font-weight: 300; color: #1A1A18; margin-bottom: 16px; line-height: 1.15; }
     .cta-p { font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 300; color: #8C857B; line-height: 1.7; margin-bottom: 36px; }
-    .btn-primary { display: inline-block; padding: 14px 36px; background: #1A1A18; color: #F5F0EB; font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; transition: all 0.3s; }
-    .btn-primary:hover { background: #3D3830; }
+    .btn-primary { display: inline-block; padding: 16px 36px; min-height: 44px; background: #1A1A18; color: #F5F0EB; font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; transition: all 0.3s; }
+    .btn-primary:hover { background: #3D3830; opacity: 1; }
 
     footer { background: #1A1A18; padding: 60px 40px 40px; border-top: 1px solid rgba(140,133,123,0.15); }
     .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 40px; }
@@ -106,31 +109,43 @@
       nav.scrolled { padding: 14px 20px; }
       .nav-links { display: none; }
       .nav-links.open { display: flex; flex-direction: column; gap: 0; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(26,26,24,0.98); justify-content: center; align-items: center; z-index: 99; }
-      .nav-links.open a { font-size: 15px; letter-spacing: 3px; padding: 18px 0; border-bottom: 1px solid rgba(140,133,123,0.15); width: 200px; text-align: center; opacity: 1; }
-      .burger { display: flex !important; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; padding: 4px; }
-      .burger span { display: block; width: 24px; height: 1.5px; background: #FEFDFB; transition: all 0.3s ease; }
+      .nav-links.open a { font-size: 15px; letter-spacing: 3px; padding: 18px 0; border-bottom: 1px solid rgba(140,133,123,0.15); width: 200px; text-align: center; opacity: 1; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+      .burger { display: flex; }
       .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
       .burger.open span:nth-child(2) { opacity: 0; }
       .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-      .page-hero { height: 55vh; min-height: 400px; }
-      .page-hero-content { padding: 40px 24px; }
+      .page-hero { height: clamp(50vh, 55vh, 55vh); min-height: 350px; }
+      .page-hero-content { padding: 40px clamp(16px, 4vw, 24px); }
       .page-hero-h1 { font-size: clamp(32px,9vw,48px); }
-      .intro-section { padding: 70px 24px; }
-      .intro-h2 { font-size: 30px; }
-      .timeline-section { padding: 0 20px 70px; }
-      .timeline-step { padding-left: 70px; padding-bottom: 60px; }
-      .timeline-h3 { font-size: 24px; }
-      .expect-section { padding: 70px 24px; }
+      .page-hero-sub { font-size: clamp(14px, 3.2vw, 16px); }
+      .intro-section { padding: clamp(50px, 10vw, 70px) clamp(16px, 4vw, 24px); }
+      .intro-h2 { font-size: clamp(26px, 6vw, 30px); }
+      .intro-p { font-size: clamp(14px, 3vw, 15px); }
+      .timeline-section { padding: 0 clamp(16px, 3.5vw, 20px) clamp(50px, 10vw, 70px); }
+      .timeline-step { padding-left: clamp(56px, 12vw, 70px); padding-bottom: clamp(48px, 10vw, 60px); }
+      .timeline-h3 { font-size: clamp(22px, 5vw, 24px); }
+      .timeline-p { font-size: clamp(13px, 2.8vw, 14px); }
+      .expect-section { padding: clamp(50px, 10vw, 70px) clamp(16px, 4vw, 24px); }
       .expect-grid { grid-template-columns: 1fr; }
-      .section-h2-light { font-size: 34px; }
-      .faq-section { padding: 70px 24px; }
-      .faq-h2 { font-size: 30px; }
-      .faq-q-text { font-size: 18px; }
-      .cta-section { padding: 70px 24px; }
-      .cta-h2 { font-size: 34px; }
-      footer { padding: 48px 24px 32px; }
+      .section-h2-light { font-size: clamp(28px, 6.5vw, 34px); }
+      .faq-section { padding: clamp(50px, 10vw, 70px) clamp(16px, 4vw, 24px); }
+      .faq-h2 { font-size: clamp(26px, 6vw, 30px); }
+      .faq-q-text { font-size: clamp(17px, 3.8vw, 18px); }
+      .faq-a-inner { font-size: clamp(13px, 2.8vw, 14px); }
+      .cta-section { padding: clamp(50px, 10vw, 70px) clamp(16px, 4vw, 24px); }
+      .cta-h2 { font-size: clamp(28px, 6.5vw, 34px); }
+      .cta-p { font-size: clamp(14px, 3vw, 15px); }
+      .footer-links a { min-height: 44px; display: flex; align-items: center; }
+      footer { padding: clamp(40px, 8vw, 48px) clamp(16px, 4vw, 24px) clamp(28px, 5vw, 32px); }
       .footer-inner { flex-direction: column; gap: 32px; }
+      .footer-links { flex-direction: column; gap: 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .timeline-line { left: 24px; }
+      .timeline-dot { left: 12px; }
+      .expect-item { padding: 24px; }
     }
   </style>
 </head>
@@ -146,12 +161,12 @@
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </div>
-    <div class="burger" id="burger" style="display:none;">
+    <div class="burger" id="burger">
       <span></span><span></span><span></span>
     </div>
   </nav>
 
-  <section class="page-hero" style="background-image:url('hero-process.jpg');">
+  <section class="page-hero" style="background-image:url('hero-background.jpg');">
     <div class="page-hero-overlay"></div>
     <div class="page-hero-content">
       <div class="page-hero-eyebrow fade-init fade-up" data-delay="0.3">Our Process</div>
@@ -313,7 +328,7 @@
   <footer>
     <div class="footer-inner">
       <div>
-        <div class="footer-logo">Otto <span>Design + Build</span></div>
+        <img src="otto-logo-white.png" alt="Otto Design + Build" style="height:52px; opacity:0.9; margin-bottom:14px; display:block;" />
         <div class="footer-info">Austin & Dallas–Fort Worth, Texas<br>info@ottodesignandbuild.com<br>(512) 555-0100</div>
       </div>
       <div class="footer-links">
